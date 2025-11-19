@@ -1,0 +1,27 @@
+server:
+  port: 6363
+
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat.model: qwen3:8b
+    memory:
+      redis:
+        host: localhost
+        password: redis
+        port: 6379
+        timeout: 60000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dee?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  config:
+    import:
+      - optional:classpath:.env[.properties]
+      - classpath:config/qr_code.yml
+      - classpath:config/zhi_pu.yml
+      - classpath:config/dash_scope.yml
+      - classpath:config/vector_store.yml
+      - classpath:config/mcp.yml

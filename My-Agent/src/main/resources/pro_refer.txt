@@ -1,0 +1,8 @@
+AI 项目参考：
+  1. https://github.com/keras-team/keras/tree/master/examples
+  2. AI 恋爱键盘
+
+
+
+
+  1. 通过AI 生成小说 然后构建 AI角色，聊天室
