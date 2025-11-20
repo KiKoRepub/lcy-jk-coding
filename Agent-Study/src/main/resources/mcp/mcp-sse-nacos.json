@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "nacos-mcp-router": {
+      "url": "http://127.0.0.1:8848/sse"
+    }
+  }
+}

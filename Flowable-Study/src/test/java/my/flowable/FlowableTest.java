@@ -2,7 +2,6 @@ package my.flowable;
 
 
 import junit.framework.Assert;
-import org.apache.http.util.Asserts;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.test.Deployment;

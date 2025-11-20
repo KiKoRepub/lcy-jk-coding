@@ -1,0 +1,27 @@
+spring:
+  ai:
+    alibaba:
+      mcp:
+        nacos:
+          namespace: public
+          server-addr: 127.0.0.1:8848
+          username: nacos
+          password: nacos
+          client:
+            enabled: true
+            sse:
+              connections:
+                server1:
+                  service-name: Mcp-Server-Local # Nacos 中对应 MCP Server 的服务名
+                  version: 1.0.0 # Nacos 中对应 MCP Server 的版本号
+    mcp:
+      client:
+        enabled: true
+        name: mcp-client-webflux
+        version: 0.0.1
+        initialized: true
+        request-timeout: 600s
+        type: async
+        toolcallback:
+          enabled: true
+        root-change-notification: true

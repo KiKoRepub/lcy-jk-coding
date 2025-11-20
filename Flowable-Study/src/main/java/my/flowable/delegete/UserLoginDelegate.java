@@ -1,6 +1,5 @@
 package my.flowable.delegete;
 
-import lombok.experimental.Delegate;
 import my.flowable.annotion.MyDelegate;
 import my.flowable.service.UserService;
 import org.flowable.engine.delegate.DelegateExecution;

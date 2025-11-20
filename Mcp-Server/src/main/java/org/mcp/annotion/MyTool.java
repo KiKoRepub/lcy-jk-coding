@@ -3,7 +3,6 @@ package org.mcp.annotion;
 import org.springframework.context.annotation.Description;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.lang.annotation.*;
 

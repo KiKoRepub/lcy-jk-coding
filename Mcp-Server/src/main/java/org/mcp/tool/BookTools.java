@@ -3,7 +3,6 @@ package org.mcp.tool;
 import org.mcp.annotion.MyTool;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
-import org.springframework.context.annotation.Description;
 
 import java.util.ArrayList;
 import java.util.List;

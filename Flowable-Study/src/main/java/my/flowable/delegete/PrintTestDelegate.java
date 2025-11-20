@@ -1,7 +1,6 @@
 package my.flowable.delegete;
 
 import my.flowable.annotion.MyDelegate;
-import org.flowable.common.engine.api.FlowableIllegalArgumentException;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 
