@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestController
-@RequestMapping("/mcp/tools")
 @Api(tags = "MCP管理")
+@RequestMapping("/mcp/tools")
 public class MCPToolController {
 
     @Autowired(required = false)

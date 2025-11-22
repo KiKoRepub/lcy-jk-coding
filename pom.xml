@@ -16,6 +16,7 @@
         <module>Mcp-Server</module>
         <module>Agent-Study</module>
         <module>Camunda-Study</module>
+        <module>Nacos-Mcp-Client</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -25,7 +26,9 @@
     <project.java.version>17</project.java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.ai.version>1.0.0</spring.ai.version>
+    <spring.ai.version2>1.1.0</spring.ai.version2>
       <alibaba.spring.ai.version>1.0.0.2</alibaba.spring.ai.version>
+      <spring-ai-alibaba.extensions.version>1.1.0.0-M5</spring-ai-alibaba.extensions.version>
       <grpc.version>1.39.0</grpc.version>
   </properties>
 
@@ -44,11 +47,18 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-bom</artifactId>
-            <version>${spring.ai.version}</version>
+            <version>${spring.ai.version2}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.cloud.ai</groupId>
+            <artifactId>spring-ai-alibaba-extensions-bom</artifactId>
+            <version>${spring-ai-alibaba.extensions.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -138,15 +148,15 @@
     </plugins>
   </build>
 
-    <repositories>
-        <!-- 导入 openAI 之前 需要导入 这个仓库-->
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        &lt;!&ndash; 导入 openAI 之前 需要导入 这个仓库&ndash;&gt;-->
+<!--        <repository>-->
+<!--            <id>spring-milestones</id>-->
+<!--            <name>Spring Milestones</name>-->
+<!--            <url>https://repo.spring.io/milestone</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 </project>

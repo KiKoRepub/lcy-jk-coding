@@ -17,7 +17,9 @@ spring:
 #              sse-endpoint: /sse?key=${AMAP_API_KEY}
 
         stdio:
-          servers-configuration: classpath:mcp/mcp-stdio-servers.json
+          servers-configuration: classpath:mcp/mcp-stdio-nacos.json
+#          servers-configuration: classpath:mcp/mcp-stdio-nacos.json
+#          下载了额外的文件:  C:/Users/qazxc/.cache/chroma/onnx_models/all-MiniLM-L6-v2/onnx.tar.gz
         request-timeout: 60000
         type: async
 
