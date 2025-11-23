@@ -3,13 +3,13 @@ spring:
     mcp:
       server:
         name: Mcp-Server-Local   # MCP服务名称
-        version: 1.0.0            # 服务版本
+        version: 1.0.1            # 服务版本
         type: ASYNC                # 调用类型：SYNC（同步）或ASYNC（异步）
-        instructions: "本地MCP服务，用于测试和开发目的"
+        instructions: "本地MCP服务，用于测试和开发目的，包括天气查询工具"
     alibaba:
       mcp:
         nacos:
-          namespace: 8237f998-2f01-4cf8-bfc1-64012d09cce2
+          namespace: public
           server-addr: 127.0.0.1:8848
           username: nacos
           password: nacos

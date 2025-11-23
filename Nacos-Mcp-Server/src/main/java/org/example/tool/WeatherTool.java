@@ -9,6 +9,7 @@ public class WeatherTool {
 
     @Tool(description = "Get weather information by city name")
     public String getWeather(@ToolParam(description = "City name") String cityName) {
+        System.out.println("Fetching weather for city: " + cityName);
         return "Sunny in " + cityName;
     }
 }

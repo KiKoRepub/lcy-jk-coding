@@ -32,10 +32,11 @@ public class NacosMcpController {
         ToolCallback[] nacosToolCallbacks = mcpToolCallbackProviderMap.get(NACOS_ROUTER_NAME)
                 .getToolCallbacks();
 
-
+        // 不能直接问问题，需要明确指出让它从现有工具中去查询其他工具来解决需求问题。
+        String messagePrefix = "尝试利用现有的工具进行其他工具的查询，然后告诉我:";
 
         ChatResponse response = chatClient.prompt()
-                .user(message)
+                .user(messagePrefix + message)
                 .toolCallbacks(nacosToolCallbacks)
                 .call()
                 .chatResponse();
@@ -45,7 +46,7 @@ public class NacosMcpController {
 
         System.out.println("Nacos MCP Router Response: " + text);
 
-        return "Nacos MCP Router is working!";
+        return text;
     }
     @GetMapping("/list")
     public String listMcpRouters(){

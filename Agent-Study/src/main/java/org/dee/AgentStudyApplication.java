@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class DeeApplication
+public class AgentStudyApplication
 {
 
     public static void main( String[] args )
     {
-        SpringApplication.run(DeeApplication.class, args);
+        SpringApplication.run(AgentStudyApplication.class, args);
     }
 }
