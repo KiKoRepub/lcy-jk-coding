@@ -1,8 +1,8 @@
 package org.dee.controller;
 
 import io.modelcontextprotocol.client.McpAsyncClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.dee.callBack.MyMcpToolCallBackProvider;
 import org.dee.entity.vo.ResultBean;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestController
-@Api(tags = "MCP管理")
+@Tag(name = "MCP管理")
 @RequestMapping("/mcp/tools")
 public class MCPToolController {
 
@@ -33,7 +33,7 @@ public class MCPToolController {
      * 获取所有MCP客户端信息
      */
     @GetMapping("/clients")
-    @ApiOperation(value = "获取MCP客户端列表", notes = "获取所有已连接的MCP客户端信息")
+    @Operation(summary = "获取MCP客户端列表", description = "获取所有已连接的MCP客户端信息")
     public ResultBean getClients() {
         if (mcpAsyncClients == null || mcpAsyncClients.isEmpty()) {
             return ResultBean.error(ErrorCodeEnum.FAIL,"未找到任何MCP客户端");
@@ -85,7 +85,7 @@ public class MCPToolController {
      * 获取指定客户端的工具列表
      */
     @GetMapping("/list/{clientName}")
-    @ApiOperation(value = "获取指定客户端的工具", notes = "根据客户端名称获取其提供的工具列表")
+    @Operation(summary = "获取指定客户端的工具", description = "根据客户端名称获取其提供的工具列表")
     public ResultBean getToolsByClient(@PathVariable String clientName) {
         if (mcpAsyncClients == null || mcpAsyncClients.isEmpty()) {
             return ResultBean.error(ErrorCodeEnum.FAIL,"未找到任何MCP客户端");
@@ -129,7 +129,7 @@ public class MCPToolController {
      * 获取所有工具回调提供者信息
      */
     @GetMapping("/providers")
-    @ApiOperation(value = "获取工具回调提供者", notes = "获取所有已注册的工具回调提供者信息")
+    @Operation(summary = "获取工具回调提供者", description = "获取所有已注册的工具回调提供者信息")
     public ResultBean getProviders() {
         if (mcpToolCallbackProviderMap == null || mcpToolCallbackProviderMap.isEmpty()) {
             return ResultBean.error(ErrorCodeEnum.FAIL,"未找到任何工具回调提供者");
@@ -156,7 +156,7 @@ public class MCPToolController {
      * 测试MCP连接
      */
     @GetMapping("/test-connection")
-    @ApiOperation(value = "测试MCP连接", notes = "测试所有MCP客户端的连接状态")
+    @Operation(summary = "测试MCP连接", description = "测试所有MCP客户端的连接状态")
     public ResultBean testConnection() {
         if (mcpAsyncClients == null || mcpAsyncClients.isEmpty()) {
             return ResultBean.error(ErrorCodeEnum.FAIL,"未找到任何MCP客户端");
@@ -198,7 +198,7 @@ public class MCPToolController {
      * 刷新MCP工具列表
      */
     @PostMapping("/refresh")
-    @ApiOperation(value = "刷新工具列表", notes = "重新从MCP服务器获取工具列表")
+    @Operation(summary = "刷新工具列表", description = "重新从MCP服务器获取工具列表")
     public ResultBean refreshTools() {
         if (mcpAsyncClients == null || mcpAsyncClients.isEmpty()) {
             return ResultBean.error(ErrorCodeEnum.FAIL,"未找到任何MCP客户端");

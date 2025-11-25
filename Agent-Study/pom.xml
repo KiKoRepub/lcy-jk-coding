@@ -14,6 +14,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.doc.version>2.3.0</spring.doc.version>
     </properties>
 
     <dependencies>
@@ -22,42 +23,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
-<!--            <artifactId>spring-ai-alibaba-starter-dashscope</artifactId>-->
-<!--            <version>${alibaba.spring.ai.version}</version>-->
-<!--        </dependency>-->
-
-<!--    Nacos Mcp Server 有问题  versionDetail <=> NPE -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
-<!--            <artifactId>spring-ai-alibaba-starter-mcp-registry</artifactId>-->
-<!--            <version>1.0.0.3</version>-->
-<!--        </dependency>-->
-
-<!--        Nacos Client -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
-<!--            <artifactId>spring-ai-alibaba-starter-mcp-distributed</artifactId>-->
-<!--            <version>${spring-ai-alibaba.extensions.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
-<!--            <artifactId>spring-ai-alibaba-mcp-common</artifactId>-->
-<!--            <version>${spring-ai-alibaba.extensions.version}</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.ai</groupId>-->
-<!--            <artifactId>spring-ai-autoconfigure-model-chat-client</artifactId>-->
-<!--            <version>1.1.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.ai</groupId>-->
-<!--            <artifactId>spring-ai-autoconfigure-model-openai</artifactId>-->
-<!--            <version>1.1.0</version>-->
-<!--        </dependency>-->
         <!-- 添加 Spring AI MCP 依赖 -->
 
         <dependency>
@@ -69,7 +34,7 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-ollama</artifactId>
-            <version>${spring.ai.version}</version>
+<!--            <version>${spring.ai.version}</version>-->
         </dependency>
 
 <!--        Redis 作为聊天记录的缓存 -->
@@ -162,12 +127,12 @@
 
 
 <!--       Swagger -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.6.2</version>
-        </dependency>
 
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${spring.doc.version}</version> <!-- 兼容 Spring Boot 3.3.x -->
+        </dependency>
 <!--    AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -179,6 +144,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+<!--        微信支付-->
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>
@@ -192,6 +158,7 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
 
 
     </dependencies>

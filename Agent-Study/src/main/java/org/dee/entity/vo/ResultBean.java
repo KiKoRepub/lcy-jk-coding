@@ -1,17 +1,17 @@
 package org.dee.entity.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.dee.enums.ErrorCodeEnum;
 
 @Data
 public class ResultBean<T> {
 
-    @ApiModelProperty("状态码")
+    @Schema(description = "状态码")
     private int code;
-    @ApiModelProperty("返回信息")
+    @Schema(description = "返回信息")
     private String message;
-    @ApiModelProperty("返回数据")
+    @Schema(description = "返回数据")
     private T data;
 
 

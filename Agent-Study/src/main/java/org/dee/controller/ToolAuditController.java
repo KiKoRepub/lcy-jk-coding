@@ -1,7 +1,7 @@
 package org.dee.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.dee.entity.ToolAuditLog;
 import org.dee.entity.vo.ResultBean;
 import org.dee.enums.ErrorCodeEnum;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Api(tags = "工具审计管理")
+@Tag(name = "工具审计管理")
 @RequestMapping("/tool-audit")
 public class ToolAuditController {
 
@@ -26,7 +26,7 @@ public class ToolAuditController {
      * 根据对话ID查询审计日志
      */
     @GetMapping("/conversation/{conversationId}")
-    @ApiOperation(value = "根据对话ID查询审计日志", notes = "查询指定对话中的所有工具调用记录")
+    @Operation(summary = "根据对话ID查询审计日志", description = "查询指定对话中的所有工具调用记录")
     public ResultBean<List<ToolAuditLog>> getLogsByConversationId(@PathVariable String conversationId) {
         try {
             List<ToolAuditLog> logs = toolAuditService.getLogsByConversationId(conversationId);
@@ -40,7 +40,7 @@ public class ToolAuditController {
      * 根据工具名称查询审计日志
      */
     @GetMapping("/tool/{toolName}")
-    @ApiOperation(value = "根据工具名称查询审计日志", notes = "查询指定工具的调用记录")
+    @Operation(summary = "根据工具名称查询审计日志", description = "查询指定工具的调用记录")
     public ResultBean<List<ToolAuditLog>> getLogsByToolName(
             @PathVariable String toolName,
             @RequestParam(defaultValue = "100") Integer limit) {
@@ -56,7 +56,7 @@ public class ToolAuditController {
      * 查询指定时间范围内的审计日志
      */
     @GetMapping("/time-range")
-    @ApiOperation(value = "查询时间范围内的审计日志", notes = "查询指定时间段内的所有工具调用记录")
+    @Operation(summary = "查询时间范围内的审计日志", description = "查询指定时间段内的所有工具调用记录")
     public ResultBean<List<ToolAuditLog>> getLogsByTimeRange(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endTime) {
@@ -72,7 +72,7 @@ public class ToolAuditController {
      * 查询失败的工具调用
      */
     @GetMapping("/failed")
-    @ApiOperation(value = "查询失败的工具调用", notes = "查询所有执行失败的工具调用记录")
+    @Operation(summary = "查询失败的工具调用", description = "查询所有执行失败的工具调用记录")
     public ResultBean<List<ToolAuditLog>> getFailedLogs(
             @RequestParam(defaultValue = "50") Integer limit) {
         try {
@@ -87,7 +87,7 @@ public class ToolAuditController {
      * 统计工具调用次数
      */
     @GetMapping("/count/{toolName}")
-    @ApiOperation(value = "统计工具调用次数", notes = "统计指定工具在时间范围内的调用次数")
+    @Operation(summary = "统计工具调用次数", description = "统计指定工具在时间范围内的调用次数")
     public ResultBean<Map<String, Object>> countToolUsage(
             @PathVariable String toolName,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
@@ -110,7 +110,7 @@ public class ToolAuditController {
      * 获取工具使用统计
      */
     @GetMapping("/statistics")
-    @ApiOperation(value = "获取工具使用统计", notes = "获取指定时间范围内的工具使用统计信息")
+    @Operation(summary = "获取工具使用统计", description = "获取指定时间范围内的工具使用统计信息")
     public ResultBean<Map<String, Object>> getToolUsageStatistics(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endTime) {
@@ -126,7 +126,7 @@ public class ToolAuditController {
      * 获取最近24小时的统计
      */
     @GetMapping("/statistics/recent")
-    @ApiOperation(value = "获取最近24小时统计", notes = "获取最近24小时的工具使用统计")
+    @Operation(summary = "获取最近24小时统计", description = "获取最近24小时的工具使用统计")
     public ResultBean<Map<String, Object>> getRecentStatistics() {
         try {
             LocalDateTime endTime = LocalDateTime.now();
@@ -142,7 +142,7 @@ public class ToolAuditController {
      * 删除指定时间之前的审计日志
      */
     @DeleteMapping("/cleanup")
-    @ApiOperation(value = "清理历史审计日志", notes = "删除指定时间之前的审计日志")
+    @Operation(summary = "清理历史审计日志", description = "删除指定时间之前的审计日志")
     public ResultBean<Map<String, Object>> deleteLogsBefore(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime beforeTime) {
         try {

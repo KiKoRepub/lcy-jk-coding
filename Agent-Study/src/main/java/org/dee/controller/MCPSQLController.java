@@ -1,7 +1,7 @@
 package org.dee.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.dee.entity.SQLMcpServer;
 import org.dee.entity.dto.McpServerDto;
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/mcp")
-@Api(tags = "MCP数据库管理")
+@Tag(name = "MCP数据库管理")
 public class MCPSQLController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class MCPSQLController {
      * 获取所有MCP服务器列表
      */
     @GetMapping("/server-list")
-    @ApiOperation(value = "获取MCP服务器列表", notes = "获取所有已配置的MCP服务器信息")
+    @Operation(summary = "获取MCP服务器列表", description = "获取所有已配置的MCP服务器信息")
     public ResultBean getMCPServerList() {
         try {
             List<McpServerVo> serverList = mcpService.getMcpServerList();
@@ -48,7 +48,7 @@ public class MCPSQLController {
      * 根据ID获取MCP服务器详情
      */
     @GetMapping("/server/{id}")
-    @ApiOperation(value = "获取MCP服务器详情", notes = "根据ID获取指定MCP服务器的详细信息")
+    @Operation(summary = "获取MCP服务器详情", description = "根据ID获取指定MCP服务器的详细信息")
     public ResultBean getMCPServerById(@PathVariable Integer id) {
         try {
             McpServerVo server = mcpService.getMcpServerById(id);
@@ -66,7 +66,7 @@ public class MCPSQLController {
      * 添加MCP服务器
      */
     @PostMapping("/add-server")
-    @ApiOperation(value = "添加MCP服务器", notes = "添加新的MCP服务器配置")
+    @Operation(summary = "添加MCP服务器", description = "添加新的MCP服务器配置")
     public ResultBean addMCPServer(@Valid @RequestBody McpServerDto mcpServerDto) {
         try {
             SQLMcpServer mcpServer = new SQLMcpServer();
@@ -87,7 +87,7 @@ public class MCPSQLController {
      * 更新MCP服务器
      */
     @PutMapping("/update-server")
-    @ApiOperation(value = "更新MCP服务器", notes = "更新已存在的MCP服务器配置")
+    @Operation(summary = "更新MCP服务器", description = "更新已存在的MCP服务器配置")
     public ResultBean updateMCPServer(@Valid @RequestBody McpServerDto mcpServerDto) {
         try {
             if (mcpServerDto.getId() == null) {
@@ -112,7 +112,7 @@ public class MCPSQLController {
      * 删除MCP服务器
      */
     @DeleteMapping("/server/{id}")
-    @ApiOperation(value = "删除MCP服务器", notes = "根据ID删除指定的MCP服务器")
+    @Operation(summary = "删除MCP服务器", description = "根据ID删除指定的MCP服务器")
     public ResultBean deleteMCPServer(@PathVariable Integer id) {
         try {
             boolean success = mcpService.deleteMcpServer(id);
@@ -130,7 +130,7 @@ public class MCPSQLController {
      * 启用/禁用MCP服务器
      */
     @PatchMapping("/server/{id}/toggle")
-    @ApiOperation(value = "启用/禁用MCP服务器", notes = "切换MCP服务器的启用状态")
+    @Operation(summary = "启用/禁用MCP服务器", description = "切换MCP服务器的启用状态")
     public ResultBean toggleMCPServer(@PathVariable Integer id, 
                                       @RequestParam Boolean enabled) {
         try {
@@ -149,7 +149,7 @@ public class MCPSQLController {
      * 测试MCP服务器连接
      */
     @GetMapping("/server/{id}/test")
-    @ApiOperation(value = "测试MCP服务器连接", notes = "测试指定MCP服务器的连接状态")
+    @Operation(summary = "测试MCP服务器连接", description = "测试指定MCP服务器的连接状态")
     public ResultBean testConnection(@PathVariable Integer id) {
         try {
             boolean result = mcpService.testConnectionById(id);

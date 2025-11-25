@@ -1,7 +1,7 @@
 package org.dee.entity.dto;
 
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import java.util.List;
 @Data
 public class RedisChatMessageDTO {
 
-    @ApiModelProperty("使用的工具集")
+    @Schema(description = "使用的工具集")
     private List<String> toolCalls;
-    @ApiModelProperty("用户消息")
+    @Schema(description = "用户消息")
     private String  userMessage;
-    @ApiModelProperty("机器人回复")
+    @Schema(description = "机器人回复")
     private String  botResponse;
 
     public RedisChatMessageDTO(String userMessage, String botResponse) {

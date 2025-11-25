@@ -1,6 +1,7 @@
 package org.dee.controller.test;
 
 import org.dee.callBack.MyMcpToolCallBackProvider;
+import org.dee.enums.NacosEnum;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.tool.ToolCallback;
@@ -22,16 +23,14 @@ public class NacosMcpController {
     private Map<String, MyMcpToolCallBackProvider> mcpToolCallbackProviderMap;
 
 
-    private static final String NACOS_ROUTER_NAME = "nacos-mcp-router";
 
 
 
     @GetMapping("/mcp")
     public String testNacosMcp(@RequestParam("message") String message){
 
-        ToolCallback[] nacosToolCallbacks = mcpToolCallbackProviderMap.get(NACOS_ROUTER_NAME)
+        ToolCallback[] nacosToolCallbacks = mcpToolCallbackProviderMap.get(NacosEnum.MCP.value)
                 .getToolCallbacks();
-
         // 不能直接问问题，需要明确指出让它从现有工具中去查询其他工具来解决需求问题。
         String messagePrefix = "尝试利用现有的工具进行其他工具的查询，然后告诉我:";
 
@@ -50,7 +49,7 @@ public class NacosMcpController {
     }
     @GetMapping("/list")
     public String listMcpRouters(){
-        ToolCallback[] nacosToolCallbacks = mcpToolCallbackProviderMap.get(NACOS_ROUTER_NAME)
+        ToolCallback[] nacosToolCallbacks = mcpToolCallbackProviderMap.get(NacosEnum.MCP.value)
                 .getToolCallbacks();
         String message = "List available MCP servers from your nacos router,which is maybe a toolCallback";
 

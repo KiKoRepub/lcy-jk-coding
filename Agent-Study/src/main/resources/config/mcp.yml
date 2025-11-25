@@ -3,7 +3,7 @@ spring:
     mcp:
       client:
         enabled: true
-        name: dee-mcp-client
+        name: agent-study-mcp-client
         toolcallback:
           enabled: true
 #        sse:

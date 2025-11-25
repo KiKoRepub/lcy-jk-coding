@@ -1,0 +1,9 @@
+server:
+  port: 11211
+#spring:
+#  nacos:
+#    config:
+#      enabled: true
+#      server-addr: localhost:8848
+#      username: nacos
+#      password: nacos

@@ -1,0 +1,1724 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Agent Study API",
+    "description": "OpenAPI documentation powered by springdoc-openapi",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:6363",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/tool/{id}/toggle": {
+      "put": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "切换工具状态",
+        "description": "启用或禁用指定的工具",
+        "operationId": "toggleToolStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/update-server": {
+      "put": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "更新MCP服务器",
+        "description": "更新已存在的MCP服务器配置",
+        "operationId": "updateMCPServer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpServerDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/toDatabase": {
+      "post": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "加载工具到数据库",
+        "description": "扫描所有带@MyTool注解的类，将工具信息保存到数据库",
+        "operationId": "loadToolsToDatabase",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/tools/refresh": {
+      "post": {
+        "tags": [
+          "MCP管理"
+        ],
+        "summary": "刷新工具列表",
+        "description": "重新从MCP服务器获取工具列表",
+        "operationId": "refreshTools",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/add-server": {
+      "post": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "添加MCP服务器",
+        "description": "添加新的MCP服务器配置",
+        "operationId": "addMCPServer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/McpServerDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/persist": {
+      "post": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "手动持久化对话",
+        "description": "立即将 Redis 中的对话记录持久化到数据库",
+        "operationId": "persistConversation",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/server/{id}/toggle": {
+      "patch": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "启用/禁用MCP服务器",
+        "description": "切换MCP服务器的启用状态",
+        "operationId": "toggleMCPServer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/loadCallBack": {
+      "get": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "加载启用的工具回调",
+        "description": "获取所有启用状态的工具并转换为 ToolCallback 数组",
+        "operationId": "loadEnabledToolCallbacks",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/list": {
+      "get": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "获取所有工具",
+        "description": "从数据库查询所有工具列表",
+        "operationId": "getAllTools",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListSQLTool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/enabled": {
+      "get": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "获取启用的工具",
+        "description": "从数据库查询所有启用状态的工具",
+        "operationId": "getEnabledTools",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListSQLTool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/enabled/{userId}": {
+      "get": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "获取用户启用的工具",
+        "description": "从数据库查询指定用户所有启用状态的工具",
+        "operationId": "getUserEnabledTools",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListSQLTool"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/tool/{toolName}": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "根据工具名称查询审计日志",
+        "description": "查询指定工具的调用记录",
+        "operationId": "getLogsByToolName",
+        "parameters": [
+          {
+            "name": "toolName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListToolAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/time-range": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "查询时间范围内的审计日志",
+        "description": "查询指定时间段内的所有工具调用记录",
+        "operationId": "getLogsByTimeRange",
+        "parameters": [
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListToolAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/statistics": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "获取工具使用统计",
+        "description": "获取指定时间范围内的工具使用统计信息",
+        "operationId": "getToolUsageStatistics",
+        "parameters": [
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/statistics/recent": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "获取最近24小时统计",
+        "description": "获取最近24小时的工具使用统计",
+        "operationId": "getRecentStatistics",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/failed": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "查询失败的工具调用",
+        "description": "查询所有执行失败的工具调用记录",
+        "operationId": "getFailedLogs",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListToolAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/count/{toolName}": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "统计工具调用次数",
+        "description": "统计指定工具在时间范围内的调用次数",
+        "operationId": "countToolUsage",
+        "parameters": [
+          {
+            "name": "toolName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/conversation/{conversationId}": {
+      "get": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "根据对话ID查询审计日志",
+        "description": "查询指定对话中的所有工具调用记录",
+        "operationId": "getLogsByConversationId",
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanListToolAuditLog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test/nacos/mcp": {
+      "get": {
+        "tags": [
+          "nacos-mcp-controller"
+        ],
+        "operationId": "testNacosMcp",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test/nacos/list": {
+      "get": {
+        "tags": [
+          "nacos-mcp-controller"
+        ],
+        "operationId": "listMcpRouters",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sse/status": {
+      "get": {
+        "tags": [
+          "SSE连接管理"
+        ],
+        "summary": "检查连接状态",
+        "description": "查询指定用户的SSE连接状态",
+        "operationId": "checkStatus",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sse/count": {
+      "get": {
+        "tags": [
+          "SSE连接管理"
+        ],
+        "summary": "获取连接数",
+        "description": "获取当前活跃的SSE连接总数",
+        "operationId": "getConnectionCount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sse/connect": {
+      "get": {
+        "tags": [
+          "SSE连接管理"
+        ],
+        "summary": "建立SSE连接",
+        "description": "客户端通过此接口建立SSE长连接，用于接收实时消息",
+        "operationId": "connect",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/SseEmitter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/tools/test-connection": {
+      "get": {
+        "tags": [
+          "MCP管理"
+        ],
+        "summary": "测试MCP连接",
+        "description": "测试所有MCP客户端的连接状态",
+        "operationId": "testConnection",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/tools/providers": {
+      "get": {
+        "tags": [
+          "MCP管理"
+        ],
+        "summary": "获取工具回调提供者",
+        "description": "获取所有已注册的工具回调提供者信息",
+        "operationId": "getProviders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/tools/list/{clientName}": {
+      "get": {
+        "tags": [
+          "MCP管理"
+        ],
+        "summary": "获取指定客户端的工具",
+        "description": "根据客户端名称获取其提供的工具列表",
+        "operationId": "getToolsByClient",
+        "parameters": [
+          {
+            "name": "clientName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/tools/clients": {
+      "get": {
+        "tags": [
+          "MCP管理"
+        ],
+        "summary": "获取MCP客户端列表",
+        "description": "获取所有已连接的MCP客户端信息",
+        "operationId": "getClients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/server/{id}": {
+      "get": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "获取MCP服务器详情",
+        "description": "根据ID获取指定MCP服务器的详细信息",
+        "operationId": "getMCPServerById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "删除MCP服务器",
+        "description": "根据ID删除指定的MCP服务器",
+        "operationId": "deleteMCPServer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/server/{id}/test": {
+      "get": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "测试MCP服务器连接",
+        "description": "测试指定MCP服务器的连接状态",
+        "operationId": "testConnection_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp/server-list": {
+      "get": {
+        "tags": [
+          "MCP数据库管理"
+        ],
+        "summary": "获取MCP服务器列表",
+        "description": "获取所有已配置的MCP服务器信息",
+        "operationId": "getMCPServerList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/tool": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用工具与模型聊天",
+        "description": "向聊天模型发送消息，并使用工具进行辅助",
+        "operationId": "chatWithTool",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/tool/stream": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用工具与模型聊天（SSE流式）",
+        "description": "向聊天模型发送消息，使用工具辅助，通过SSE流式返回响应",
+        "operationId": "chatWithToolStream",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/push": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用记忆与模型聊天",
+        "description": "向聊天模型发送消息，并根据聊天内存检索响应",
+        "operationId": "chat",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/push/stream": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用记忆与模型聊天（SSE流式）",
+        "description": "向聊天模型发送消息，通过SSE流式返回响应",
+        "operationId": "chatStream",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/mcp": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用MCP工具与模型聊天",
+        "description": "向聊天模型发送消息，并使用MCP工具进行辅助",
+        "operationId": "chatWithMcpTool",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          },
+          {
+            "name": "mcpNames",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/mcp/stream": {
+      "get": {
+        "tags": [
+          "聊天管理"
+        ],
+        "summary": "使用MCP工具与模型聊天（SSE流式）",
+        "description": "向聊天模型发送消息，使用MCP工具辅助，通过SSE流式返回响应",
+        "operationId": "chatWithMcpToolStream",
+        "parameters": [
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expireSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 3600
+            }
+          },
+          {
+            "name": "mcpNames",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool/{id}": {
+      "delete": {
+        "tags": [
+          "工具管理"
+        ],
+        "summary": "删除工具",
+        "description": "从数据库删除指定的工具",
+        "operationId": "deleteTool",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tool-audit/cleanup": {
+      "delete": {
+        "tags": [
+          "工具审计管理"
+        ],
+        "summary": "清理历史审计日志",
+        "description": "删除指定时间之前的审计日志",
+        "operationId": "deleteLogsBefore",
+        "parameters": [
+          {
+            "name": "beforeTime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultBeanMapStringObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sse/disconnect": {
+      "delete": {
+        "tags": [
+          "SSE连接管理"
+        ],
+        "summary": "断开SSE连接",
+        "description": "主动断开指定用户的SSE连接",
+        "operationId": "disconnect",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultBeanVoid": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "返回数据"
+          }
+        }
+      },
+      "McpServerDto": {
+        "required": [
+          "serverName",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "服务器ID（更新时必填）",
+            "format": "int32"
+          },
+          "serverName": {
+            "type": "string",
+            "description": "MCP服务器名称",
+            "example": "高德地图MCP服务"
+          },
+          "serverUrl": {
+            "type": "string",
+            "description": "MCP服务器URL",
+            "example": "https://mcp.amap.com"
+          },
+          "description": {
+            "type": "string",
+            "description": "服务器描述",
+            "example": "提供地图相关功能的MCP服务"
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "SSE/HTTP端点路径",
+            "example": "/sse?key=YOUR_API_KEY"
+          },
+          "type": {
+            "type": "string",
+            "description": "服务器类型：STDIO, HTTP, SSE",
+            "example": "SSE",
+            "enum": [
+              "STDIO",
+              "HTTP",
+              "SSE"
+            ]
+          },
+          "jsonContent": {
+            "type": "string",
+            "description": "STDIO类型的JSON配置内容",
+            "example": "{\"command\":\"npx.cmd\",\"args\":[\"chrome-devtools-mcp@latest\"]}"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用",
+            "example": true
+          }
+        },
+        "description": "MCP服务器请求参数"
+      },
+      "ResultBean": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "返回数据"
+          }
+        }
+      },
+      "ResultBeanMapStringObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "description": "返回数据"
+            },
+            "description": "返回数据"
+          }
+        }
+      },
+      "ResultBeanObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "返回数据"
+          }
+        }
+      },
+      "ResultBeanListSQLTool": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/SQLTool"
+            }
+          }
+        }
+      },
+      "SQLTool": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "工具ID",
+            "format": "int32"
+          },
+          "toolName": {
+            "type": "string",
+            "description": "工具名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "工具描述"
+          },
+          "className": {
+            "type": "string",
+            "description": "工具类的完整类名(MCP对应 ServerName,USER 对应 用户id )"
+          },
+          "inputSchema": {
+            "type": "string",
+            "description": "工具参数定义(JSON格式)"
+          },
+          "enabled": {
+            "type": "integer",
+            "description": "是否启用: 1-启用, 0-禁用",
+            "format": "int32"
+          },
+          "category": {
+            "type": "string",
+            "description": "工具分类"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          }
+        },
+        "description": "返回数据"
+      },
+      "ResultBeanListToolAuditLog": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "状态码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/ToolAuditLog"
+            }
+          }
+        }
+      },
+      "ToolAuditLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "日志ID",
+            "format": "int32"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "对话ID"
+          },
+          "requestId": {
+            "type": "string",
+            "description": "请求ID"
+          },
+          "toolName": {
+            "type": "string",
+            "description": "工具名称"
+          },
+          "methodName": {
+            "type": "string",
+            "description": "方法名称"
+          },
+          "status": {
+            "type": "string",
+            "description": "执行状态: STARTED, COMPLETED, FAILED"
+          },
+          "parameters": {
+            "type": "string",
+            "description": "工具参数(JSON格式)"
+          },
+          "result": {
+            "type": "string",
+            "description": "执行结果(JSON格式)"
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "executionTime": {
+            "type": "integer",
+            "description": "执行耗时(毫秒)",
+            "format": "int64"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "startAt": {
+            "type": "string",
+            "description": "开始时间",
+            "format": "date-time"
+          },
+          "endAt": {
+            "type": "string",
+            "description": "结束时间",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string",
+            "description": "用户ID"
+          },
+          "ipAddress": {
+            "type": "string",
+            "description": "IP地址"
+          }
+        },
+        "description": "返回数据"
+      },
+      "SseEmitter": {
+        "type": "object",
+        "properties": {
+          "timeout": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

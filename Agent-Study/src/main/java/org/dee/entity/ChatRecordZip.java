@@ -3,7 +3,7 @@ package org.dee.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,31 +13,31 @@ import java.time.LocalDateTime;
 public class ChatRecordZip {
 
     @TableId
-    @ApiModelProperty("ID")
+    @Schema(description = "ID")
     private Integer id;
 
     @TableField("user_id")
-    @ApiModelProperty("User ID")
+    @Schema(description = "User ID")
     private String userId;
 
     @TableField("conversation_id")
-    @ApiModelProperty("Conversation ID")
+    @Schema(description = "Conversation ID")
     private String conversationId;
 
     @TableField("title")
-    @ApiModelProperty("Title")
+    @Schema(description = "Title")
     private String title;
 
     @TableField("compressed_data")
-    @ApiModelProperty("Compressed Data")
+    @Schema(description = "Compressed Data")
     private String compressedData;
 
     @TableField("created_at")
-    @ApiModelProperty("Persistence Type: auto-自动持久化, manual-手动持久化")
+    @Schema(description = "Persistence Type: auto-自动持久化, manual-手动持久化")
     private String persistenceTypeCode;
 
     @TableField("persistence_time")
-    @ApiModelProperty("Persistence Time")
+    @Schema(description = "Persistence Time")
     private LocalDateTime persistenceTime;
 
 }

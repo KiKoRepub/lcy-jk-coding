@@ -17,6 +17,7 @@
         <module>Agent-Study</module>
         <module>Camunda-Study</module>
         <module>Nacos-Mcp-Client</module>
+        <module>Service-Mcp</module>
     </modules>
     <packaging>pom</packaging>
 

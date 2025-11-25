@@ -1,7 +1,7 @@
 package org.dee.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.dee.sse.SSEServer;
 import org.springframework.http.MediaType;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @Slf4j
 @RestController
 @RequestMapping("/sse")
-@Api(tags = "SSE连接管理")
+@Tag(name = "SSE连接管理")
 public class SSEController {
 
     /**
@@ -23,7 +23,7 @@ public class SSEController {
      * @return SseEmitter对象
      */
     @GetMapping(value = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @ApiOperation(value = "建立SSE连接", notes = "客户端通过此接口建立SSE长连接，用于接收实时消息")
+    @Operation(summary = "建立SSE连接", description = "客户端通过此接口建立SSE长连接，用于接收实时消息")
     public SseEmitter connect(@RequestParam("userId") String userId) {
         log.info("收到SSE连接请求: userId={}", userId);
         
@@ -55,7 +55,7 @@ public class SSEController {
      * @return 操作结果
      */
     @DeleteMapping("/disconnect")
-    @ApiOperation(value = "断开SSE连接", notes = "主动断开指定用户的SSE连接")
+    @Operation(summary = "断开SSE连接", description = "主动断开指定用户的SSE连接")
     public String disconnect(@RequestParam("userId") String userId) {
         log.info("收到断开SSE连接请求: userId={}", userId);
         
@@ -74,7 +74,7 @@ public class SSEController {
      * @return 连接状态
      */
     @GetMapping("/status")
-    @ApiOperation(value = "检查连接状态", notes = "查询指定用户的SSE连接状态")
+    @Operation(summary = "检查连接状态", description = "查询指定用户的SSE连接状态")
     public String checkStatus(@RequestParam("userId") String userId) {
         boolean connected = SSEServer.isConnected(userId);
         return String.format("用户 %s 的连接状态: %s", userId, connected ? "已连接" : "未连接");
@@ -85,7 +85,7 @@ public class SSEController {
      * @return 连接数统计
      */
     @GetMapping("/count")
-    @ApiOperation(value = "获取连接数", notes = "获取当前活跃的SSE连接总数")
+    @Operation(summary = "获取连接数", description = "获取当前活跃的SSE连接总数")
     public String getConnectionCount() {
         int count = SSEServer.getConnectionCount();
         return String.format("当前活跃连接数: %d", count);

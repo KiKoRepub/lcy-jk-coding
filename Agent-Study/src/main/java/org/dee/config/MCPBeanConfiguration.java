@@ -3,8 +3,13 @@ package org.dee.config;
 import io.modelcontextprotocol.client.McpAsyncClient;
 import lombok.extern.slf4j.Slf4j;
 import org.dee.callBack.MyMcpToolCallBackProvider;
+import org.dee.enums.NacosEnum;
 import org.springframework.ai.mcp.AsyncMcpToolCallback;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,12 +31,15 @@ public class MCPBeanConfiguration {
     private List<McpAsyncClient> mcpAsyncClients;
 
     /**
+     * 当前上下文中没有名为 loadbalancedMcpAsyncToolCallbacks的Bean时创建该Bean
+     *  (没有使用 nacos 进行 MCP服务直连 的时候 会用到)
      * 创建MCP工具回调提供者
      * 将所有MCP客户端的工具转换为ToolCallback并注册
      * 
      * @return ToolCallbackProvider实例
      */
     @Bean
+    @ConditionalOnMissingBean(name = "loadbalancedMcpAsyncToolCallbacks")
     public Map<String,MyMcpToolCallBackProvider>  mcpToolCallbackProviderMap() {
         log.info("初始化MCP工具回调提供者");
         Map<String,MyMcpToolCallBackProvider> providerMap = new HashMap<>();
@@ -60,7 +68,28 @@ public class MCPBeanConfiguration {
 
         return providerMap;
     }
-    
+
+    /**
+     * 使用 nacos 进行 MCP服务直连 的时候 会用到
+     * 创建MCP工具回调提供者对应的Map 对象
+     * @param tools
+     * @return
+     */
+    @Bean
+    @ConditionalOnBean(name = "loadbalancedMcpAsyncToolCallbacks")
+    public Map<String,MyMcpToolCallBackProvider>  loadbalancedMcpToolCallbackProviderMap(
+            @Qualifier("loadbalancedMcpAsyncToolCallbacks") ToolCallbackProvider tools) {
+
+        log.info("初始化 nacos 直连MCP工具回调 提供者");
+        System.out.println(tools.getClass());
+
+        Map<String,MyMcpToolCallBackProvider> providerMap = new HashMap<>();
+
+        MyMcpToolCallBackProvider provider = new MyMcpToolCallBackProvider(tools.getToolCallbacks());
+
+        providerMap.put(NacosEnum.MCP.value,provider);
+        return providerMap;
+    }
     /**
      * 获取所有MCP工具的名称列表
      * 
