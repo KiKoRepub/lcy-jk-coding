@@ -1,9 +1,11 @@
 server:
   port: 11211
-#spring:
-#  nacos:
-#    config:
-#      enabled: true
-#      server-addr: localhost:8848
-#      username: nacos
-#      password: nacos
+spring:
+  application:
+    name: service-mcp
+nacos:
+  server-addr: 127.0.0.1:8848
+  namespace: mcp
+  username: nacos
+  password: nacos
+

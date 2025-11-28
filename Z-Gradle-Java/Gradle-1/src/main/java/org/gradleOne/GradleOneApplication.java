@@ -1,10 +1,12 @@
-package org.example;
+package org.gradleOne;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 @SpringBootApplication
-public class ServiceMcpApplication {
+public class GradleOneApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceMcpApplication.class, args);
+        SpringApplication.run(GradleOneApplication.class, args);
+        System.out.println("Hello world!");
     }
 }

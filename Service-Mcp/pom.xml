@@ -21,10 +21,18 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
+        <!--    alibaba 的 cloud 不支持 SpringBoot 3.4.x -->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-alibaba-nacos-config</artifactId>-->
-<!--            <version>2023.0.3.2</version>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--            <version>2023.0.3.4</version>-->
 <!--        </dependency>-->
 
         <dependency>
