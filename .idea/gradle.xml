@@ -4,16 +4,19 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="delegatedBuild" value="true" />
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/Z-Gradle-Java" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../Maven_Gradle/gradle-8.14" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/Z-Gradle-Java" />
             <option value="$PROJECT_DIR$/Z-Gradle-Java/Gradle-1" />
+            <option value="$PROJECT_DIR$/Z-Gradle-Java/Gradle-2" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

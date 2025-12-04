@@ -3,7 +3,7 @@ spring:
     mcp:
       server:
         name: Mcp-Server-Local   # MCP服务名称
-        version: 2.0.0            # 服务版本
+        version: 2.0.1           # 服务版本
         type: ASYNC                # 调用类型：SYNC（同步）或ASYNC（异步）
         instructions: "本地MCP服务，用于测试和开发目的，包括天气查询工具"
         streamable-http:
@@ -25,4 +25,4 @@ spring:
           register:
             enabled: true
 #            service-group: mcp-server
-            service-name: webflux-mcp-server-yingzi
+            service-name: mcp-local

@@ -14,6 +14,7 @@
     <modules>
         <module>Flowable-Study</module>
         <module>Mcp-Server</module>
+        <module>Agent2Agent</module>
         <module>Agent-Study</module>
         <module>Camunda-Study</module>
         <module>Nacos-Mcp-Client</module>
@@ -124,7 +125,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.22</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
 
