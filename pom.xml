@@ -27,8 +27,7 @@
   <properties>
     <project.java.version>17</project.java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.ai.version>1.0.0</spring.ai.version>
-    <spring.ai.version2>1.1.0</spring.ai.version2>
+    <spring.ai.version>1.1.0-M4</spring.ai.version>
       <alibaba.spring.ai.version>1.0.0.2</alibaba.spring.ai.version>
       <spring-ai-alibaba.extensions.version>1.1.0.0-M5</spring-ai-alibaba.extensions.version>
       <grpc.version>1.39.0</grpc.version>
@@ -49,7 +48,7 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-bom</artifactId>
-            <version>${spring.ai.version2}</version>
+            <version>${spring.ai.version}</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

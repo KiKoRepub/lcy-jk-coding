@@ -3,11 +3,12 @@ server:
 spring:
   ai:
     dashscope:
-      chat:
-        api-key: ${DASHSCOPE_CHAT_KEY}
-#    ollama:
-#      base-url: http://localhost:11434
-#      chat.model: qwen3:8b
+      api-key: ${DASHSCOPE_CHAT_KEY}
+    ollama:
+      base-url: http://localhost:11434
+      chat.model: qwen3:8b
+
   config:
     import:
       - optional:classpath:.env[.properties]
+      - optional:classpath:config/a2a.yml

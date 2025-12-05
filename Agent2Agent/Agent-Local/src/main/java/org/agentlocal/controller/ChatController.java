@@ -5,6 +5,7 @@ import com.alibaba.cloud.ai.graph.agent.ReactAgent;
 import com.alibaba.cloud.ai.graph.exception.GraphRunnerException;
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,13 @@ public class ChatController {
 
         return "Hello from ChatController!";
 
+    }
+    @Autowired
+    A2AExample example;
+    @GetMapping("/test")
+    public String test() throws GraphRunnerException {
+        example.callRemoteAgent();
+        return "Test endpoint is working!";
     }
 
 }

@@ -1,0 +1,38 @@
+spring:
+  ai:
+    alibaba:
+      a2a:
+        client:
+          card:
+            name: data_analysis_agent
+            description: 专门用于数据分析和统计计算的本地智能体
+            capabilities:
+              streaming: true
+              pushNotifications: true
+              stateTransitionHistory: true
+              extensions:
+            default-input-modes:
+              - text
+              - file
+            default-output-modes:
+                - text
+                - file
+            skills:
+              id: 1
+              name: aaaa
+              description:  aaaaaa
+              tags:
+                - tag1
+#        server:
+#          version: 1.0.0
+#          card:
+#            name: data_analysis_agent
+#            description: 专门用于数据分析和统计计算的本地智能体
+#            provider:
+#              name: Spring AI Alibaba Documentation
+#              organization: Spring AI Alibaba
+
+#  根据 ReactAgent Bean 生成 AgentCard
+#  暴露 REST API 端点：
+#  /.well-known/agent.json - AgentCard 元数据
+#  /a2a/message - Agent 调用端点

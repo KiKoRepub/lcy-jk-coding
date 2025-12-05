@@ -21,6 +21,16 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.alibaba.agent.version>1.1.0.0-M5</spring.alibaba.agent.version>
+
+<!--    A2A Dependencies Version -->
+        <io.a2a.sdk.version>0.3.2.Final</io.a2a.sdk.version>
+
+        <!-- Common dependency versions -->
+        <jakarta.enterprise.cdi-api.version>4.1.0</jakarta.enterprise.cdi-api.version>
+        <quarkus.platform.version>3.26.1</quarkus.platform.version>
+        <quarkus.langchain4j.version>1.3.1</quarkus.langchain4j.version>
+        <protobuf.version>4.31.1</protobuf.version>
+
     </properties>
 
 
@@ -38,6 +48,8 @@
             <artifactId>spring-ai-alibaba-studio</artifactId>
             <version>${spring.alibaba.agent.version}</version>
         </dependency>
+
+
 
 
 
