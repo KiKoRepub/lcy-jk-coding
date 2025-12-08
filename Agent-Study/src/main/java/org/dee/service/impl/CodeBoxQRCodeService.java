@@ -1,7 +1,7 @@
 package org.dee.service.impl;
 
 
-import org.dee.config.QRCodeProperties;
+import org.dee.config.properties.QRCodeProperties;
 import org.dee.service.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

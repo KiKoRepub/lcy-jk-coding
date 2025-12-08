@@ -1,4 +1,4 @@
-package org.dee.utlis;
+package org.dee.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.tool.annotation.ToolParam;

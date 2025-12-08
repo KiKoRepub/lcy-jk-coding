@@ -3,6 +3,6 @@ package org.dee.config;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class VectorStoreConfiguarion {
+public class VectorStoreConfig {
 
 }

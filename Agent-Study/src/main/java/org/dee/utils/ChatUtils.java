@@ -1,4 +1,4 @@
-package org.dee.utlis;
+package org.dee.utils;
 
 public class ChatUtils {
 

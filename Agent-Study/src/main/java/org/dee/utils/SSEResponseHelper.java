@@ -1,4 +1,4 @@
-package org.dee.utlis;
+package org.dee.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.dee.sse.SSEServer;

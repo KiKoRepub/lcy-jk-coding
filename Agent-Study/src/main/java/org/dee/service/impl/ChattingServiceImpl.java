@@ -3,7 +3,7 @@ package org.dee.service.impl;
 import org.dee.entity.vo.ResultBean;
 import org.dee.enums.PersistenceType;
 import org.dee.service.*;
-import org.dee.utlis.ChatUtils;
+import org.dee.utils.ChatUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.beans.factory.annotation.Autowired;

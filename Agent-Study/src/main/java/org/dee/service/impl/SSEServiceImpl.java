@@ -6,7 +6,7 @@ import org.dee.entity.vo.SSEMessageVo;
 import org.dee.enums.ErrorCodeEnum;
 import org.dee.service.*;
 import org.dee.sse.SSEServer;
-import org.dee.utlis.ChatUtils;
+import org.dee.utils.ChatUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.tool.ToolCallback;

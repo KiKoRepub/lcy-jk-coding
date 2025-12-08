@@ -1,4 +1,4 @@
-package org.dee.config;
+package org.dee.config.properties;
 
 
 import lombok.Data;

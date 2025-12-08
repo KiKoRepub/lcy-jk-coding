@@ -9,7 +9,7 @@ import org.dee.mapper.ChatRecordMapper;
 import org.dee.mapper.ChatRecordZipMapper;
 import org.dee.service.CacheChatService;
 import org.dee.service.ChatContextService;
-import org.dee.utlis.ChatUtils;
+import org.dee.utils.ChatUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;

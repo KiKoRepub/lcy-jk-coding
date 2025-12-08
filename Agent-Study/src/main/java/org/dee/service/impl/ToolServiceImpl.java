@@ -9,7 +9,7 @@ import org.dee.entity.dto.ToolInputDTO;
 import org.dee.enums.ToolTypeEnum;
 import org.dee.mapper.ToolMapper;
 import org.dee.service.ToolService;
-import org.dee.utlis.ToolUtils;
+import org.dee.utils.ToolUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.ToolCallback;
