@@ -24,7 +24,7 @@ public class SSEController {
      */
     @GetMapping(value = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     @Operation(summary = "建立SSE连接", description = "客户端通过此接口建立SSE长连接，用于接收实时消息")
-    public SseEmitter connect(@RequestParam("userId") String userId) {
+    public SseEmitter connect(@RequestParam("userId") Long userId) {
         log.info("收到SSE连接请求: userId={}", userId);
         
         // 如果已存在连接，先移除
@@ -56,7 +56,7 @@ public class SSEController {
      */
     @DeleteMapping("/disconnect")
     @Operation(summary = "断开SSE连接", description = "主动断开指定用户的SSE连接")
-    public String disconnect(@RequestParam("userId") String userId) {
+    public String disconnect(@RequestParam("userId") Long userId) {
         log.info("收到断开SSE连接请求: userId={}", userId);
         
         boolean success = SSEServer.removeEmitter(userId);
@@ -75,7 +75,7 @@ public class SSEController {
      */
     @GetMapping("/status")
     @Operation(summary = "检查连接状态", description = "查询指定用户的SSE连接状态")
-    public String checkStatus(@RequestParam("userId") String userId) {
+    public String checkStatus(@RequestParam("userId") Long userId) {
         boolean connected = SSEServer.isConnected(userId);
         return String.format("用户 %s 的连接状态: %s", userId, connected ? "已连接" : "未连接");
     }

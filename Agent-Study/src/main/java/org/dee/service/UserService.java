@@ -1,8 +1,12 @@
 package org.dee.service;
 
+import org.dee.entity.dto.user.UserRegisterDTO;
+
 public interface UserService {
-    String analyzeUserIdFromToken(String userToken);
+    Long analyzeUserIdFromToken(String userToken);
 
 
+    String analyzeUserNameFromToken(String userToken);
 
+    boolean registerNewUser(UserRegisterDTO dto);
 }

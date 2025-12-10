@@ -30,7 +30,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 
     @Override
-    public ResultBean chatWithCache(String message, String conversationId, String userId, long expireSeconds) {
+    public ResultBean chatWithCache(String message, String conversationId, Long userId, long expireSeconds) {
         // 加载上下文：获取历史对话记录和概要
         String contextPrompt = chatContextService.buildContextPrompt(conversationId, userId, message);
 
@@ -50,13 +50,13 @@ public class ChattingServiceImpl implements ChattingService {
         return ResultBean.success(botResponse);
     }
     @Override
-    public ResultBean streamChatWithCache(String message, String conversationId, String userId, long expireSeconds) {
+    public ResultBean streamChatWithCache(String message, String conversationId, Long userId, long expireSeconds) {
         return sseService.handleStreamChat(message, conversationId, userId,
                 chatContextService.buildContextPrompt(conversationId, userId, message),
                 expireSeconds);
     }
     @Override
-    public ResultBean chatUsingTool(String message, String conversationId, String userId, long expireSeconds) {
+    public ResultBean chatUsingTool(String message, String conversationId, Long userId, long expireSeconds) {
         String contextPrompt = chatContextService.buildContextPrompt(conversationId, userId, message);
 
         ChatResponse response = chatClient.prompt()
@@ -73,14 +73,14 @@ public class ChattingServiceImpl implements ChattingService {
         return ResultBean.success(botResponse);
     }
     @Override
-    public ResultBean streamChatUsingTool(String message, String conversationId, String userId, long expireSeconds) {
+    public ResultBean streamChatUsingTool(String message, String conversationId, Long userId, long expireSeconds) {
         return sseService.handleStreamChatWithTools(message, conversationId, userId,
                 chatContextService.buildContextPrompt(conversationId, userId, message),
                 expireSeconds);
     }
 
     @Override
-    public ResultBean chatUsingMcpTool(String message, String conversationId, String userId,
+    public ResultBean chatUsingMcpTool(String message, String conversationId, Long userId,
                                              long expireSeconds, List<String> mcpNames){
         String contextPrompt = chatContextService.buildContextPrompt(conversationId, userId, message);
 
@@ -98,7 +98,7 @@ public class ChattingServiceImpl implements ChattingService {
         return ResultBean.success(botResponse);
     }
     @Override
-    public ResultBean streamChatUsingMcpTool(String message, String conversationId, String userId, long expireSeconds, List<String> mcpNames){
+    public ResultBean streamChatUsingMcpTool(String message, String conversationId, Long userId, long expireSeconds, List<String> mcpNames){
         return sseService.handleStreamChatWithMcpTools(message, conversationId, userId,
                 chatContextService.buildContextPrompt(conversationId, userId, message),
                 expireSeconds, mcpNames);

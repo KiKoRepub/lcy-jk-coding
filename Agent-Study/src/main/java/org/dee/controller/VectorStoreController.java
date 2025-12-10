@@ -33,7 +33,7 @@ public class VectorStoreController {
 
     @PostMapping(value = "/add-file",produces = "multipart/form-data")
     public void addVectorStoreFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-        userService.analyzeUserIdFromToken()
+        userService.analyzeUserIdFromToken(request.getHeader("Authorization"));
         vectorStoreService.addVectorStoreFile(file);
     }
 

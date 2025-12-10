@@ -3,7 +3,7 @@ package org.dee.utils;
 public class ChatUtils {
 
 
-    public static String buildConversationKey(String conversationId,String userId){
+    public static String buildConversationKey(String conversationId,Long userId){
         return "chat:conversation:" + userId + ":" + conversationId;
     }
 

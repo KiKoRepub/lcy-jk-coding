@@ -33,7 +33,7 @@ public interface ChatContextService {
      */
     String generateSummary(List<ChatMessageDTO> messages);
 
-    String buildContextPrompt(String conversationId, String userId, String currentMessage);
+    String buildContextPrompt(String conversationId, Long userId, String currentMessage);
 
     ChatRecordZip getChatRecordZip(String conversationId);
 

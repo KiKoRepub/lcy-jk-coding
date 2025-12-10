@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 public class SSEServer {
 
 
-    private static final Map<String, SseEmitter> userEmitters = new ConcurrentHashMap<>();
+    private static final Map<Long, SseEmitter> userEmitters = new ConcurrentHashMap<>();
 
 
     /**
@@ -23,7 +23,7 @@ public class SSEServer {
      * @param userId 用户ID
      * @return SseEmitter对象
      */
-    public static SseEmitter connect(String userId) {
+    public static SseEmitter connect(Long userId) {
         try {
             // timeout 设置为0，表示永不超时
             SseEmitter emitter = new SseEmitter(0L);
@@ -58,7 +58,7 @@ public class SSEServer {
      * @param data 消息数据
      * @return 是否发送成功
      */
-    public static boolean sendMessage(String userId, String eventName, Object data) {
+    public static boolean sendMessage(Long userId, String eventName, Object data) {
         SseEmitter emitter = userEmitters.get(userId);
         if (emitter == null) {
             log.warn("未找到用户的SSE连接: userId={}", userId);
@@ -83,7 +83,7 @@ public class SSEServer {
      * @param data 消息数据
      * @return 是否发送成功
      */
-    public static boolean sendMessage(String userId, Object data) {
+    public static boolean sendMessage(Long userId, Object data) {
         return sendMessage(userId, "message", data);
     }
 
@@ -92,7 +92,7 @@ public class SSEServer {
      * @param userId 用户ID
      * @return 是否发送成功
      */
-    public static boolean sendComplete(String userId) {
+    public static boolean sendComplete(Long userId) {
         SseEmitter emitter = userEmitters.get(userId);
         if (emitter == null) {
             log.warn("未找到用户的SSE连接: userId={}", userId);
@@ -118,25 +118,25 @@ public class SSEServer {
      * @param userId 用户ID
      * @return 是否已连接
      */
-    public static boolean isConnected(String userId) {
+    public static boolean isConnected(Long userId) {
         return userEmitters.containsKey(userId);
     }
 
-    private static Runnable onTimeoutCallback(String userId){
+    private static Runnable onTimeoutCallback(Long userId){
         return () -> {
             log.info("SSE连接超时: userId={}", userId);
             removeEmitter(userId);
         };
     }
     
-    private static Consumer<Throwable> onErrorCallback(String userId){
+    private static Consumer<Throwable> onErrorCallback(Long userId){
         return (e) -> {
             log.error("SSE连接错误: userId={}, error={}", userId, e.getMessage());
             removeEmitter(userId);
         };
     }
     
-    private static Runnable onCompletionCallback(String userId){
+    private static Runnable onCompletionCallback(Long userId){
         return () -> {
             log.info("SSE连接完成: userId={}", userId);
             removeEmitter(userId);
@@ -148,8 +148,8 @@ public class SSEServer {
      * @param userId 用户ID
      * @return 是否移除成功
      */
-    public static boolean removeEmitter(String userId){
-        SseEmitter removed = userEmitters.remove(userId);
+    public static boolean removeEmitter(Long userId){
+        SseEmitter removed = userEmitters.remove(userId.toString());
         if (removed != null) {
             log.info("移除SSE连接: userId={}", userId);
             return true;

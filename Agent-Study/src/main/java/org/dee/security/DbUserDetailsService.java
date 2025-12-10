@@ -1,10 +1,11 @@
 package org.dee.security;
 
-import org.dee.entity.User;
+import org.dee.entity.SysUser;
 import org.dee.mapper.RoleMapper;
 import org.dee.mapper.UserMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +28,7 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User dbUser = userMapper.findByUsername(username);
+        SysUser dbUser = userMapper.findByUsername(username);
         if (Objects.isNull(dbUser) || !dbUser.isEnabled()) {
             throw new UsernameNotFoundException("User not found or disabled: " + username);
         }
@@ -38,8 +39,7 @@ public class DbUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());
 
         // 注意：当前密码经 TypeHandler 解密后是明文，使用 NoOpPasswordEncoder 进行比对。
-        return org.springframework.security.core.userdetails.User
-                .withUsername(dbUser.getUsername())
+        return User.withUsername(dbUser.getUsername())
                 .password(dbUser.getPassword())
                 .authorities(authorities)
                 .accountExpired(false)

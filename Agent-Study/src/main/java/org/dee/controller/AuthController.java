@@ -2,23 +2,26 @@ package org.dee.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.util.StringUtil;
+import org.dee.entity.SysUser;
 import org.dee.entity.dto.user.UserLoginDTO;
 import org.dee.entity.dto.user.UserRegisterDTO;
 import org.dee.entity.vo.ResultBean;
 import org.dee.entity.vo.user.UserLoginVo;
 import org.dee.enums.ErrorCodeEnum;
+import org.dee.mapper.UserMapper;
+import org.dee.service.UserService;
 import org.dee.utils.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -26,70 +29,31 @@ import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "认证管理")
+@RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-
+    private final UserService userService;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     // DB mappers
-    private final org.dee.mapper.UserMapper userMapper;
-    private final org.dee.mapper.RoleMapper roleMapper;
-    private final org.dee.mapper.UserRoleMapper userRoleMapper;
+    private final UserMapper userMapper;
 
-    public AuthController(UserDetailsService userDetailsService,
-                          PasswordEncoder passwordEncoder,
-                          org.dee.mapper.UserMapper userMapper,
-                          org.dee.mapper.RoleMapper roleMapper,
-                          org.dee.mapper.UserRoleMapper userRoleMapper) {
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-        this.userMapper = userMapper;
-        this.roleMapper = roleMapper;
-        this.userRoleMapper = userRoleMapper;
-    }
 
     // -------------------- 注册 --------------------
     @PostMapping("/register")
     @Operation(summary = "用户注册")
     public ResultBean register(@RequestBody UserRegisterDTO dto) {
+        // 参数检查
         if (dto == null || StringUtil.isBlank(dto.getUsername()) || StringUtil.isBlank(dto.getPassword())) {
             return ResultBean.error(ErrorCodeEnum.PARAM_ERROR, "用户名或密码不能为空");
         }
-
         // 检查是否已存在
-        org.dee.entity.User exists = userMapper.findByUsername(dto.getUsername());
+        SysUser exists = userMapper.findByUsername(dto.getUsername());
         if (exists != null) {
             return ResultBean.error(ErrorCodeEnum.SERVICE_ERROR, "用户已存在");
         }
-
-        // 构造用户：先使用 BCrypt 进行散列，再由 PasswordEncryptedHandler 进行对称加密入库
-        org.dee.entity.User toSave = new org.dee.entity.User();
-        toSave.setUsername(dto.getUsername());
-        toSave.setPassword(passwordEncoder.encode(dto.getPassword()));
-        toSave.setEnabled(true);
-        toSave.setCreateTime(java.time.LocalDateTime.now());
-        toSave.setUpdateTime(java.time.LocalDateTime.now());
-        userMapper.insert(toSave);
-
-        // 角色处理：默认 USER
-        List<String> inputRoles = (dto.getRoles() == null || dto.getRoles().isEmpty())
-                ? java.util.List.of("USER")
-                : dto.getRoles().stream().map(String::toUpperCase).toList();
-
-        for (String r : inputRoles) {
-            org.dee.entity.Role role = roleMapper.findByName(r);
-            if (role == null) {
-                role = new org.dee.entity.Role();
-                role.setRoleName(r);
-                role.setDescription(r + " role");
-                roleMapper.insert(role);
-            }
-            org.dee.entity.UserRole ur = new org.dee.entity.UserRole();
-            ur.setUserId(toSave.getId());
-            ur.setRoleId(role.getId());
-            ur.setCreateTime(java.time.LocalDateTime.now());
-            userRoleMapper.insert(ur);
-        }
+        // 注册新用户
+        userService.registerNewUser(dto);
 
         return ResultBean.success("注册成功");
     }
@@ -99,7 +63,7 @@ public class AuthController {
     @Operation(summary = "用户登录 (JWT)")
     public ResultBean login(@RequestBody UserLoginDTO dto) {
 
-        if (dto == null || isBlank(dto.getUsername()) || isBlank(dto.getPassword())) {
+        if (dto == null || StringUtil.isBlank(dto.getUsername()) || StringUtil.isBlank(dto.getPassword())) {
             return ResultBean.error(ErrorCodeEnum.PARAM_ERROR, "用户名或密码不能为空");
         }
 
@@ -132,25 +96,32 @@ public class AuthController {
     // -------------------- me --------------------
     @GetMapping("/me")
     @Operation(summary = "当前用户信息 (JWT)")
-    public ResponseEntity<?> me(Authentication authentication) {
-        if (authentication == null) {
-            return json(HttpStatus.UNAUTHORIZED, "未登录");
+    public ResultBean me(HttpServletRequest request) {
+        String userToken = request.getHeader("Authorization");
+        if (userToken == null) {
+            return ResultBean.error(ErrorCodeEnum.AUTH_ERROR, "未登录");
         }
+        String username = userService.analyzeUserNameFromToken(userToken);
+        UserDetails details = userDetailsService.loadUserByUsername(username);
 
-        UserDetails details = (UserDetails) authentication.getPrincipal();
-        return json(HttpStatus.OK, "OK", userInfo(details));
+        return ResultBean.success( "OK", userInfo(details));
     }
 
     // -------------------- 角色 --------------------
     @GetMapping("/roles")
     @Operation(summary = "当前用户角色列表")
-    public ResponseEntity<?> roles(Authentication authentication) {
-        if (authentication == null) {
-            return json(HttpStatus.UNAUTHORIZED, "未登录");
+    public ResultBean roles(HttpServletRequest request) {
+        String userToken = request.getHeader("Authorization");
+        if (userToken == null) {
+            return ResultBean.error(ErrorCodeEnum.AUTH_ERROR, "未登录");
         }
+        String username = userService.analyzeUserNameFromToken(userToken);
+        UserDetails details = userDetailsService.loadUserByUsername(username);
 
-        UserDetails details = (UserDetails) authentication.getPrincipal();
-        return json(HttpStatus.OK, "OK", userInfo(details));
+        return ResultBean.success("OK",
+                details.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()));
     }
 
     // -------------------- logout（无状态） --------------------
@@ -161,9 +132,6 @@ public class AuthController {
     }
 
     // -------------------- 工具方法 --------------------
-    private boolean isBlank(String s) {
-        return s == null || s.trim().isEmpty();
-    }
 
     private Map<String, Object> userInfo(UserDetails details) {
         Map<String, Object> map = new HashMap<>();
@@ -171,17 +139,5 @@ public class AuthController {
         map.put("roles", details.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).toList());
         return map;
-    }
-
-    private ResponseEntity<Map<String, Object>> json(HttpStatus status, String message) {
-        return json(status, message, null);
-    }
-
-    private ResponseEntity<Map<String, Object>> json(HttpStatus status, String msg, Object data) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("code", status.value());
-        body.put("message", msg);
-        body.put("data", data);
-        return ResponseEntity.status(status).body(body);
     }
 }

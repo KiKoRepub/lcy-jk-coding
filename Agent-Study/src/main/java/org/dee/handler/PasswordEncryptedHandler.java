@@ -37,14 +37,14 @@ public class PasswordEncryptedHandler extends BaseTypeHandler<String> {
         return encryptedPassword == null ? null : decryptValue(encryptedPassword);
     }
 
-    // ✅ 修复2：这里必须解密！
+
     @Override
     public String getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String encryptedPassword = rs.getString(columnIndex);
         return encryptedPassword == null ? null : decryptValue(encryptedPassword);
     }
 
-    // ✅ 修复3：这里必须解密！
+
     @Override
     public String getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String encryptedPassword = cs.getString(columnIndex);

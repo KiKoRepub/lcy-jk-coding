@@ -29,7 +29,7 @@ public class SSEResponseHelper {
      */
     public static void handleStreamResponse(ChatClient chatClient, 
                                            String prompt, 
-                                           String userId, 
+                                           Long userId,
                                            String conversationId,
                                            Consumer<String> onComplete) {
         handleStreamResponse(chatClient, prompt, null, userId, conversationId, onComplete);
@@ -48,7 +48,7 @@ public class SSEResponseHelper {
     public static void handleStreamResponse(ChatClient chatClient, 
                                            String prompt, 
                                            List<ToolCallback> toolCallbacks,
-                                           String userId, 
+                                           Long userId,
                                            String conversationId,
                                            Consumer<String> onComplete) {
         new Thread(() -> {
@@ -102,7 +102,7 @@ public class SSEResponseHelper {
     /**
      * 发送消息块
      */
-    public static void sendChunkMessage(String userId, String conversationId, String content) {
+    public static void sendChunkMessage(Long userId, String conversationId, String content) {
         Map<String, Object> data = new HashMap<>();
         data.put("type", "chunk");
         data.put("content", content);
@@ -114,7 +114,7 @@ public class SSEResponseHelper {
     /**
      * 发送错误消息
      */
-    public static void sendErrorMessage(String userId, String conversationId, String errorMessage) {
+    public static void sendErrorMessage(Long userId, String conversationId, String errorMessage) {
         Map<String, Object> errorData = new HashMap<>();
         errorData.put("type", "error");
         errorData.put("message", errorMessage);
@@ -126,7 +126,7 @@ public class SSEResponseHelper {
     /**
      * 发送完成消息
      */
-    public static void sendCompleteMessage(String userId, String conversationId, String fullResponse) {
+    public static void sendCompleteMessage(Long userId, String conversationId, String fullResponse) {
         Map<String, Object> completeData = new HashMap<>();
         completeData.put("type", "complete");
         completeData.put("conversationId", conversationId);
@@ -138,7 +138,7 @@ public class SSEResponseHelper {
     /**
      * 发送开始消息
      */
-    public static void sendStartMessage(String userId, String conversationId) {
+    public static void sendStartMessage(Long userId, String conversationId) {
         Map<String, Object> startData = new HashMap<>();
         startData.put("type", "start");
         startData.put("conversationId", conversationId);
@@ -149,7 +149,7 @@ public class SSEResponseHelper {
     /**
      * 检查SSE连接并返回结果
      */
-    public static Map<String, String> checkConnectionAndGetResult(String userId, String conversationId) {
+    public static Map<String, String> checkConnectionAndGetResult(Long userId, String conversationId) {
         Map<String, String> result = new HashMap<>();
         
         if (!SSEServer.isConnected(userId)) {

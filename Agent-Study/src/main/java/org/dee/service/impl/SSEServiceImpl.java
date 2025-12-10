@@ -41,7 +41,7 @@ public class SSEServiceImpl implements SSEService {
     private MCPService mcpService;
 
     @Override
-    public ResultBean handleStreamChat(String message, String conversationId, String userId,String contextPrompt, long expireSeconds) {
+    public ResultBean handleStreamChat(String message, String conversationId, Long userId,String contextPrompt, long expireSeconds) {
         log.info("开始流式对话: conversationId={}, userId={}", conversationId, userId);
 
         // 检查SSE连接是否存在
@@ -58,7 +58,7 @@ public class SSEServiceImpl implements SSEService {
     }
 
     @Override
-    public ResultBean handleStreamChatWithTools(String message, String conversationId, String userId,String contextPrompt, long expireSeconds) {
+    public ResultBean handleStreamChatWithTools(String message, String conversationId, Long userId,String contextPrompt, long expireSeconds) {
         log.info("开始工具流式对话: conversationId={}, userId={}", conversationId, userId);
 
         // 检查SSE连接是否存在
@@ -78,7 +78,7 @@ public class SSEServiceImpl implements SSEService {
     }
 
     @Override
-    public ResultBean handleStreamChatWithMcpTools(String message, String conversationId, String userId,
+    public ResultBean handleStreamChatWithMcpTools(String message, String conversationId, Long userId,
                                                    String contextPrompt, long expireSeconds, List<String> mcpNames) {
         List<ToolCallback> mcpCallbackList = mcpService.getUserSelectedToolCallbacks(mcpNames);
 
@@ -90,7 +90,7 @@ public class SSEServiceImpl implements SSEService {
     /**
      * 异步处理流式对话
      */
-    private void processStreamChatAsync(String contextPrompt,String message, String conversationId, String userId,
+    private void processStreamChatAsync(String contextPrompt,String message, String conversationId, Long userId,
                                        long expireSeconds, List<ToolCallback> toolCallbacks) {
         String conversationKey = ChatUtils.buildConversationKey(conversationId,userId);
         new Thread(() -> {
@@ -143,7 +143,7 @@ public class SSEServiceImpl implements SSEService {
     /**
      * 发送消息块
      */
-    private void sendChunkMessage(String userId, String conversationId, String content) {
+    private void sendChunkMessage(Long userId, String conversationId, String content) {
         Map<String, Object> data = new HashMap<>();
         data.put("type", "chunk");
         data.put("content", content);
@@ -155,7 +155,7 @@ public class SSEServiceImpl implements SSEService {
     /**
      * 发送错误消息
      */
-    private void sendErrorMessage(String userId, String conversationId, String errorMessage) {
+    private void sendErrorMessage(Long userId, String conversationId, String errorMessage) {
         Map<String, Object> errorData = new HashMap<>();
         errorData.put("type", "error");
         errorData.put("message", errorMessage);
@@ -173,7 +173,7 @@ public class SSEServiceImpl implements SSEService {
     /**
      * 发送完成消息
      */
-    private void sendCompleteMessage(String userId, String conversationId, String fullResponse) {
+    private void sendCompleteMessage(Long userId, String conversationId, String fullResponse) {
 
         SSEServer.sendMessage(userId, "complete",
                 new SSEMessageVo(userId,

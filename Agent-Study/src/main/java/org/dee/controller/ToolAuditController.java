@@ -58,8 +58,8 @@ public class ToolAuditController {
     @GetMapping("/time-range")
     @Operation(summary = "查询时间范围内的审计日志", description = "查询指定时间段内的所有工具调用记录")
     public ResultBean<List<ToolAuditLog>> getLogsByTimeRange(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endTime) {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime startTime,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime endTime) {
         try {
             List<ToolAuditLog> logs = toolAuditService.getLogsByTimeRange(startTime, endTime);
             return ResultBean.success(logs);
@@ -90,8 +90,8 @@ public class ToolAuditController {
     @Operation(summary = "统计工具调用次数", description = "统计指定工具在时间范围内的调用次数")
     public ResultBean<Map<String, Object>> countToolUsage(
             @PathVariable String toolName,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endTime) {
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime startTime,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime endTime) {
         try {
             Integer count = toolAuditService.countToolUsage(toolName, startTime, endTime);
             Map<String, Object> result = Map.of(
@@ -112,8 +112,8 @@ public class ToolAuditController {
     @GetMapping("/statistics")
     @Operation(summary = "获取工具使用统计", description = "获取指定时间范围内的工具使用统计信息")
     public ResultBean<Map<String, Object>> getToolUsageStatistics(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime startTime,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime endTime) {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime startTime,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime endTime) {
         try {
             Map<String, Object> statistics = toolAuditService.getToolUsageStatistics(startTime, endTime);
             return ResultBean.success(statistics);
@@ -144,7 +144,7 @@ public class ToolAuditController {
     @DeleteMapping("/cleanup")
     @Operation(summary = "清理历史审计日志", description = "删除指定时间之前的审计日志")
     public ResultBean<Map<String, Object>> deleteLogsBefore(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime beforeTime) {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime beforeTime) {
         try {
             Integer deletedCount = toolAuditService.deleteLogsBefore(beforeTime);
             Map<String, Object> result = Map.of(

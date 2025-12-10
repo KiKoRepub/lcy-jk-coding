@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @TableName("user")
-public class User {
+public class SysUser {
     @TableId(type = IdType.ASSIGN_ID)
     @Schema(description = "用户ID")
     private Long id;

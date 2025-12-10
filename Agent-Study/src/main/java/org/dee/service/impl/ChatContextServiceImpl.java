@@ -165,7 +165,7 @@ public class ChatContextServiceImpl implements ChatContextService {
      * @return 包含上下文的完整提示词
      */
     @Override
-    public String buildContextPrompt(String conversationId,String userId,String currentMessage) {
+    public String buildContextPrompt(String conversationId,Long userId,String currentMessage) {
         StringBuilder contextBuilder = new StringBuilder();
 
         // 1. 加载概要记录（ChatRecordZip）- 从数据库
