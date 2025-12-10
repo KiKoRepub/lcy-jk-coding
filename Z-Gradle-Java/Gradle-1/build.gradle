@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaLanguageVersion.of(17)
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+group = 'org.lcy-jk'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://maven.aliyun.com/repository/public" }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    api "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+}
+
+test {
+    enabled(true) // 启用
+    useJUnitPlatform() // 兼容 JUnit5
+}
+
+// task Study
+tasks.register('printSome') {
+
+    group = 'z-myTask'
+    description = 'this is a great task'
+
+    println('任务注册完成')
+    doFirst {
+        println('printSome doFirst-1')
+    }
+    doLast {
+        println('printSome doLast-1')
+    }
+}
+
+// doFirst-2 doFirst-1  do  doLast-1 doLast-2
+// 多次添加的 doFirst 会按照添加顺序(左填充) 依次执行
+// 多次添加的 doLast 会按照添加顺序(右填充) 依次执行
+//tasks.findByPath(
+//    printSome -> {
+//        doFirst{
+//            println('printSome doFirst-2')
+//        }
+//
+//        doLast{
+//            println('printSome doLast-2')
+//        }
+//    }
+//)
+
+
+printSome.dependsOn(clean){
+    println('依赖 clean 任务')
+}

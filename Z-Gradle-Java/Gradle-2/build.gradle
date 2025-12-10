@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+}
+
+group 'org.lcy-jk'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register("gradle2-exceptionDemo"){
+    doLast{
+        println("This is Gradle-2 exception demo task.")
+        // 触发一个异常
+        throw new GradleException("This is a custom exception from gradle2-exceptionDemo task.")
+    }
+}
+
+tasks.register("gradle2-demoContinue"){
+    doLast{
+        println("This is Gradle-2 demo continue task.")
+    }
+
+    doFirst{
+        println("Starting gradle2-demoContinue task.")
+    }
+
+    println("Registering gradle2-demoContinue task.")
+}
+
+
+// 相对路径寻找
+
+// gradle gradle2-demoContinue
+// 报错的情况下 添加 --continue 参数 可以继续执行后续任务，否则就会停止所有任务
+// gradle gradle2-demoContinue --continue
+//tasks.findByName(':gradle2-demoContinue').mustRunAfter('gradle2-exceptionDemo')
+
+// 全局异常捕获
+tasks.addRule("TaskNotFindCatch"){
+    String taskName -> {
+        println("TaskNotFindCatch rule triggered for task: $taskName")
+    }
+}
+
+// 默认任务
+//defaultTasks "gradle-2-demoContinue"

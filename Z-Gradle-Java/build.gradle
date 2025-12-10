@@ -1,0 +1,52 @@
+plugins {
+    id "idea"
+    id "eclipse"
+    id "io.spring.dependency-management" version "1.1.7" apply false
+}
+
+group = 'org.lcy-jk'
+version = '1.0-SNAPSHOT'
+
+// 全局配置
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+
+    idea {
+        module {
+            inheritOutputDirs = false
+        }
+    }
+}
+
+// 子项目配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: "maven-publish"
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 17
+    targetCompatibility = 17
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+// 公共依赖版本
+ext {
+    commonsLang3 = '3.12.0'
+    hutoolAllVersion = '5.8.11'
+    springBootVersion = '3.4.5'
+    springDocVersion = '2.3.0'
+}
+
+// 测试配置（只对 root）
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}

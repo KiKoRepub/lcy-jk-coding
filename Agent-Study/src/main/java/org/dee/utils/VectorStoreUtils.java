@@ -15,11 +15,24 @@ import java.util.ArrayList;
 /**
  * RAG流程中的向量存储部分
  * 利用 SpringAI 自带的向量存储类，
- * 轻松将文档转换成想了并保存到向量数据库中
+ * 轻松将文档转换 并保存到向量数据库中
  */
 public class VectorStoreUtils {
 
-    private static final int CHUNK_SIZE = 10; // 每个块的目标大小
+    /*
+
+    defaultChunkSize：每个文本块的目标 Token 数（默认值：800）。
+
+    minChunkSizeChars：每个文本块的最小字符数（默认值：350）。
+
+    minChunkLengthToEmbed：可嵌入分块的最小长度要求（默认值：5）。
+
+    maxNumChunks：单个文本生成的最大分块数限制（默认值：10000）。
+
+    keepSeparator： 是否在数据块中保留分隔符（如换行符）（默认值： true）。
+
+     */
+    private static final int CHUNK_SIZE = 150; // 每个块的目标大小
     private static final int MIN_CHUNK_SIZE_CHARS = 100; // 最小块字符数
     private static final int MIN_CHUNK_LENGTH_TO_EMBED = 10;// 嵌入的最小块长度
     private static final int MAX_NUM_CHUNKS = 400;// 最大块数量

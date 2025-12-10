@@ -1,0 +1,5 @@
+rootProject.name = 'Z-Gradle-Java'
+
+include ':Gradle-1'
+include 'Gradle-2'
+

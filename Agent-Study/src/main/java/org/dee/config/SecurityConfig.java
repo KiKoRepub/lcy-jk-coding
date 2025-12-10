@@ -1,28 +1,31 @@
 package org.dee.config;
 
+import org.dee.filter.JwtAuthenticationFilter;
+import org.dee.security.DbUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureGraphQlTester;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("alonet").password("123456").roles("USER").build();
-        UserDetails admin = User.withUsername("admin").password("123456").roles("ADMIN").build();
 
-        return new InMemoryUserDetailsManager(user, admin);
+    @Autowired
+    private JwtAuthenticationFilter jwtFilter;
+    @Bean
+    public UserDetailsService userDetailsService(DbUserDetailsService dbUserDetailsService) {
+        return dbUserDetailsService;
     }
 
     @Bean
@@ -37,9 +40,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 // 使用 HTTP Basic 简化认证（便于测试与示例）；如需前后端分离可改为 JWT
-                .httpBasic(Customizer.withDefaults())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(basic -> basic.disable())
                 .formLogin(form -> form.disable())
-                // 配置异常处理，返回 JSON 而不是重定向到登录页
+//                // 配置异常处理，返回 JSON 而不是重定向到登录页
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
                             response.setContentType("application/json;charset=UTF-8");
@@ -54,7 +58,7 @@ public class SecurityConfig {
                 )
                 // 设置为无状态会话管理
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
         return http.build();
@@ -63,7 +67,7 @@ public class SecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
 }
