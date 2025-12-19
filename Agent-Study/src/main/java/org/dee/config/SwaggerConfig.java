@@ -33,11 +33,11 @@ package org.dee.config;
 
     // 下载 Swagger配置后的接口文档 对应的 OPENAI规范文件
     public static void main(String[] args) throws IOException {
-        String basePath = "F:/DockerImages/McpAccessPoint/OpenApi";
-        String filePath = basePath + "/ServiceMcp.json";
+        String basePath = "D:\\university\\JAVA\\jingKun\\lcy-jk-coding\\Agent-Study\\docs";
+        String filePath = basePath + "/openAI_doc.json";
 
         OkHttpClient client = new OkHttpClient();
-        String url = "http://localhost:11211/v3/api-docs";
+        String url = "http://localhost:6363/v3/api-docs";
 
         Request request = new Request.Builder().url(url).build();
 

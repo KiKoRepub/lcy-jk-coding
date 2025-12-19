@@ -88,7 +88,7 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
         vo.setToken(token);
-        vo.setNote("请在请求头加入：Authorization: Bearer " + token);
+        vo.setNote("请在请求头加入：Authorization: " + token);
 
         return ResultBean.success("登录成功", vo);
     }

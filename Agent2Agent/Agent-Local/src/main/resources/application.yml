@@ -11,4 +11,6 @@ spring:
   config:
     import:
       - optional:classpath:.env[.properties]
-      - optional:classpath:config/a2a.yml
+#      - optional:classpath:config/a2a.yml
+      - optional:classpath:config/a2ajava.yml
+      - optional:classpath:config/kafka.yml

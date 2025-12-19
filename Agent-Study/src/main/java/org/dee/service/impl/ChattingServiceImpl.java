@@ -105,7 +105,7 @@ public class ChattingServiceImpl implements ChattingService {
     }
 
     @Override
-    public void persistChatMessages(String conversationId, String userId, PersistenceType type) {
+    public void persistChatMessages(String conversationId,Long userId, PersistenceType type) {
         cacheChatService.persistChatMessages(conversationId, userId, type);
     }
 

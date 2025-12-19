@@ -67,7 +67,7 @@ public class RedisKeyExpirationListener extends KeyExpirationEventMessageListene
                 // conversationKey 格式: userId:conversationId
                 String[] parts = conversationKey.split(":");
                 if (parts.length >= 2) {
-                    String userId = parts[0];
+                    Long userId = Long.parseLong(parts[0]);
                     String conversationId = parts[1];
                     
                     // 执行自动持久化操作（传入 AUTO 类型）

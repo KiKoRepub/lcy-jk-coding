@@ -81,7 +81,7 @@ public class DefaultCacheChatServiceImpl implements CacheChatService {
     }
 
     @Override
-    public void persistChatMessages(String conversationId, String userId, PersistenceType persistenceType) {
+    public void persistChatMessages(String conversationId, Long userId, PersistenceType persistenceType) {
         String typeDesc = persistenceType.getDescription();
         log.info("开始持久化对话记录: conversationId={}, userId={}, 类型={}", conversationId, userId, typeDesc);
 

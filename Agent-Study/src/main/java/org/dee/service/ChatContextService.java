@@ -22,7 +22,7 @@ public interface ChatContextService {
      */
     boolean saveChatRecord(String conversationId, String userMessage, String botResponse);
 
-    boolean batchSaveChatRecords(String conversationId, String userId, List<ChatMessageDTO> records, String persistentTypeCode);
+    boolean batchSaveChatRecords(String conversationId, Long userId, List<ChatMessageDTO> records, String persistentTypeCode);
 
 
     /**
@@ -47,6 +47,6 @@ public interface ChatContextService {
      * @param persistenceTypeCode 持久化类型
      * @return 保存的概要记录
      */
-    boolean saveChatRecordZip(String conversationId, String userId, String title, String compressedData, String persistenceTypeCode);
+    boolean saveChatRecordZip(String conversationId, Long userId, String title, String compressedData, String persistenceTypeCode);
 
 }

@@ -64,12 +64,12 @@ public class ChatContextServiceImpl implements ChatContextService {
         return chatRecordMapper.insert(record) > 0;
     }
     @Override
-    public boolean batchSaveChatRecords(String conversationId,String userId, List<ChatMessageDTO> messageList, String persistentTypeCode){
+    public boolean batchSaveChatRecords(String conversationId,Long userId, List<ChatMessageDTO> messageList, String persistentTypeCode){
         List<ChatRecord> recordList = new ArrayList<>();
         for (ChatMessageDTO message : messageList) {
             ChatRecord record = new ChatRecord();
             record.setConversationId(conversationId);
-            record.setUserId(userId);
+            record.setUserId(userId.toString());
             record.setUserMessage(message.getUserMessage());
             record.setBotResponse(message.getBotResponse());
 
@@ -91,7 +91,7 @@ public class ChatContextServiceImpl implements ChatContextService {
     }
 
     @Override
-    public boolean saveChatRecordZip(String conversationId, String userId, String title, String compressedData, String persistenceTypeCode) {
+    public boolean saveChatRecordZip(String conversationId, Long userId, String title, String compressedData, String persistenceTypeCode) {
         // 检查是否已存在该对话的概要记录
         LambdaQueryWrapper<ChatRecordZip> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ChatRecordZip::getConversationId, conversationId);
@@ -102,7 +102,7 @@ public class ChatContextServiceImpl implements ChatContextService {
 
         if (existingRecord != null) {
             // 更新已存在的记录
-            existingRecord.setUserId(userId);
+            existingRecord.setUserId(userId.toString());
             existingRecord.setTitle(title);
             existingRecord.setCompressedData(compressedData);
             existingRecord.setPersistenceTypeCode(persistenceTypeCode);
@@ -112,7 +112,7 @@ public class ChatContextServiceImpl implements ChatContextService {
             // 插入新记录
             ChatRecordZip newRecord = new ChatRecordZip();
             newRecord.setConversationId(conversationId);
-            newRecord.setUserId(userId);
+            newRecord.setUserId(userId.toString());
             newRecord.setTitle(title);
             newRecord.setCompressedData(compressedData);
             newRecord.setPersistenceTypeCode(persistenceTypeCode);

@@ -1,6 +1,7 @@
 package org.dee.security;
 
 import org.dee.entity.SysUser;
+import org.dee.handler.PasswordEncryptedHandler;
 import org.dee.mapper.RoleMapper;
 import org.dee.mapper.UserMapper;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,8 +40,9 @@ public class DbUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());
 
         // 注意：当前密码经 TypeHandler 解密后是明文，使用 NoOpPasswordEncoder 进行比对。
+        // 通过 Mybatis 获取的数据 不会走 TypeHandler，需要手动解密。
         return User.withUsername(dbUser.getUsername())
-                .password(dbUser.getPassword())
+                .password(PasswordEncryptedHandler.decryptValue(dbUser.getPassword()))
                 .authorities(authorities)
                 .accountExpired(false)
                 .accountLocked(false)

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>Agent2Agent</artifactId>
         <groupId>org.example</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.4.0.Alpha1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,28 +13,138 @@
     <artifactId>Agent-Local</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.alibaba.agent.version>1.1.0.0-M5</spring.alibaba.agent.version>
     </properties>
 
     <dependencies>
+
+
+
         <!--        Ollama-->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-ollama</artifactId>
             <version>${spring.ai.version}</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>io.github.vishalmysore</groupId>
+            <artifactId>a2ajava</artifactId>
+            <version>0.1.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.vishalmysore</groupId>
+            <artifactId>tools4ai-annotations</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.vishalmysore</groupId>
+            <artifactId>tools4ai-security</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.vishalmysore</groupId>
+            <artifactId>tools4ai</artifactId>
+            <version>1.1.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-core-jakarta</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger.parser.v3</groupId>
+                    <artifactId>swagger-parser</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!-- Spring Kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+
+<!-- 官方的A2A 实现依赖(quarkus)-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.a2asdk</groupId>-->
+<!--            <artifactId>a2a-java-sdk-client</artifactId>-->
+<!--            <version>${io.a2a.sdk.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.a2asdk</groupId>-->
+<!--            <artifactId>a2a-java-sdk-client-transport-grpc</artifactId>-->
+<!--            <version>${io.a2a.sdk.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-netty-shaded</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.a2asdk</groupId>-->
+<!--            <artifactId>a2a-java-sdk-client</artifactId>-->
+<!--            &lt;!&ndash; Use a released version from https://github.com/a2aproject/a2a-java/releases &ndash;&gt;-->
+<!--            &lt;!&ndash;            <version>${io.a2a.sdk.version}</version>&ndash;&gt;-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.github.a2asdk</groupId>-->
+<!--            <artifactId>a2a-java-sdk-client-transport-grpc</artifactId>-->
+<!--            &lt;!&ndash; Use a released version from https://github.com/a2aproject/a2a-java/releases &ndash;&gt;-->
+<!--            <version>${io.a2a.sdk.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.a2asdk</groupId>-->
+<!--            <artifactId>a2a-java-sdk-reference-grpc</artifactId>-->
+<!--            &lt;!&ndash; Use a released version from https://github.com/a2aproject/a2a-java/releases &ndash;&gt;-->
+<!--            <version>${io.a2a.sdk.version}</version>-->
+<!--        </dependency>-->
+<!--        -->
+
+
+<!--        Spring alibaba  ai dependencies -->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud.ai</groupId>-->
-<!--            <artifactId>spring-ai-alibaba-starter-dashscope</artifactId>-->
+<!--            <artifactId>spring-ai-alibaba-core</artifactId>-->
+<!--            <version>1.0.0.2</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+
+<!--                <dependency>-->
+<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
+<!--            <artifactId>spring-ai-alibaba-starter-a2a-nacos</artifactId>-->
 <!--            <version>${spring.alibaba.agent.version}</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>com.alibaba.cloud.ai</groupId>
-            <artifactId>spring-ai-alibaba-starter-a2a-nacos</artifactId>
-            <version>${spring.alibaba.agent.version}</version>
-        </dependency>
+
+        <!--       alibaba ai Agent -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
+<!--            <artifactId>spring-ai-alibaba-agent-framework</artifactId>-->
+<!--            <version>${spring.alibaba.agent.version}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
+<!--            <artifactId>spring-ai-alibaba-studio</artifactId>-->
+<!--            <version>${spring.alibaba.agent.version}</version>-->
+<!--        </dependency>-->
+
+
 
     </dependencies>
 </project>

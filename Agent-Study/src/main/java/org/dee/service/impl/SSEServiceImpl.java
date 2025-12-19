@@ -162,7 +162,7 @@ public class SSEServiceImpl implements SSEService {
         errorData.put("conversationId", conversationId);
         errorData.put("timestamp", System.currentTimeMillis());
         SSEServer.sendMessage(userId, "error", new SSEMessageVo(
-                userId,
+                userId.toString(),
                 conversationId,
                 "error",
                 errorMessage,
@@ -176,7 +176,7 @@ public class SSEServiceImpl implements SSEService {
     private void sendCompleteMessage(Long userId, String conversationId, String fullResponse) {
 
         SSEServer.sendMessage(userId, "complete",
-                new SSEMessageVo(userId,
+                new SSEMessageVo(userId.toString(),
                     conversationId,
                         "complete",
                         fullResponse,

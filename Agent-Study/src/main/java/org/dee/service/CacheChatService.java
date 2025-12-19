@@ -32,5 +32,5 @@ public interface CacheChatService {
      * @param userId 用户ID
      * @param persistenceType 持久化类型（自动/手动）
      */
-    void persistChatMessages(String conversationId, String userId, PersistenceType persistenceType);
+    void persistChatMessages(String conversationId, Long userId, PersistenceType persistenceType);
 }
