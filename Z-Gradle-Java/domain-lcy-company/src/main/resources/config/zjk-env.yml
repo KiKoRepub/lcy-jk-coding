@@ -1,13 +1,7 @@
 #k8s
 POD_NAMESPACE: ndpa
 
-#minio
-MINIO_API_ENDPOINT: https://minio-api.dev.jingkunsystem.com:29041/
-# MINIO_API_ENDPOINT: http://minio-api.uat.jingkunsystem.com/
-MINIO_ACCESS_KEY: admin
-MINIO_BUCKET_NAME: jkstack-ndpa
-MINIO_SECRET_KEY: jkstack@minio
-MINIO_PATH_PREFIX:
+
 
 #mysql
 MYSQL_HOST: mysql.dev.jkservice.org

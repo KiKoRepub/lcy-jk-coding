@@ -40,8 +40,4 @@ public class FormProp implements Serializable {
      */
     private FormConfig config;
 
-    public FormConfig getConfig() {
-
-        return config;
-    }
 }

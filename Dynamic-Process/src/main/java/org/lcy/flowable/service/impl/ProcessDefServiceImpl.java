@@ -125,7 +125,7 @@ public class ProcessDefServiceImpl implements ProcessDefService {
             AssigneeProps assigneeProps = processNode.getAssigneeProps();
             //设置办理人类型
             customProperties.add(
-                    buildCustomProperty("assigneeType", assigneeProps.getAssigneeTypeEnum().toString()));
+                    buildCustomProperty("assigneeType", assigneeProps.getAssigneeType().toString()));
             //设置候选办理人类型
             if (ObjectUtil.isNotNull(assigneeProps.getCandidateType())) {
 

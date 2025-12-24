@@ -13,7 +13,7 @@ public class AssigneeProps implements Serializable {
     /**
      * 办理人类型.
      */
-    private AssigneeTypeEnum assigneeTypeEnum;
+    private AssigneeTypeEnum assigneeType;
 
     /**
      * 候选办理人类型.

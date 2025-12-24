@@ -1,0 +1,94 @@
+curl -X POST 'http://localhost:8080/api/process-def/v1' \
+-H 'Content-Type: application/json' \
+-d '{
+  "processName": "通过bpmn model创建的绩效流程",
+  "description": "用于员工季度绩效评估",
+  "processNode": {
+    "name": "员工自评",
+    "category": "SELF_EVALUATION",
+    "enable": 1,
+    "assigneeProps": {
+      "assigneeType": "USER_ASSESSED"
+    },
+    "formProps": [
+      {
+        "name": "自评分数",
+        "type": "string",
+        "value": "0",
+        "config": {
+          "group": "绩效评分",
+          "weight": 0.3,
+          "category": "SCORE"
+        }
+      },
+      {
+        "name": "自我评价",
+        "type": "string",
+        "config": {
+          "group": "评语",
+          "weight": 0.3,
+          "category": "COMMENT"
+        }
+      }
+    ],
+    "children": {
+      "name": "上级评价",
+      "category": "LEADER_EVALUATION",
+      "enable": 1,
+      "assigneeProps": {
+        "assigneeType": "LEADER"
+      },
+      "formProps": [
+        {
+          "name": "上级评分",
+          "type": "string",
+          "value": "0",
+          "config": {
+            "group": "绩效评分",
+            "weight": 0.5,
+            "category": "SCORE"
+          }
+        },
+        {
+          "name": "上级评语",
+          "type": "string",
+          "config": {
+            "group": "评语",
+            "weight": 0.5,
+            "category": "COMMENT"
+          }
+        }
+      ],
+      "children": {
+        "name": "隔级评价",
+        "category": "AUDIT",
+        "enable": 1,
+        "assigneeProps": {
+          "assigneeType": "SUPERIOR_LEADER"
+        },
+        "formProps": [
+          {
+            "name": "隔级评分",
+            "type": "string",
+            "value": "0",
+            "config": {
+              "group": "绩效评分",
+              "weight": 0.2,
+              "category": "SCORE"
+            }
+          },
+          {
+            "name": "隔级评语",
+            "type": "string",
+            "config": {
+              "group": "评语",
+              "weight": 0.2,
+              "category": "COMMENT"
+            }
+          }
+        ],
+        "children": null
+      }
+    }
+  }
+}'

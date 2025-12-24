@@ -27,8 +27,11 @@ dependencies {
     api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
     api "org.springframework.boot:spring-boot-starter:${springBootVersion}"
     api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-    api "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    implementation 'mysql:mysql-connector-java:8.0.31'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.23'
 
-
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 

@@ -14,9 +14,10 @@ public class FileUploadService {
     private MinIoService minIoService;
     public String uploadFile(String fileName, String fileType, InputStream inputStream, String bucketName) {
 
-        final String objectName = FilePathEnum.getFilePath(fileType) + fileName;
-        minIoService.putObject(bucketName, objectName, inputStream);
-        return objectName;
+//        final String objectName = FilePathEnum.getFilePath(fileType) + fileName;
+
+        minIoService.putObject(bucketName, fileName, inputStream);
+        return fileName;
     }
 
     public void removeObject(String objectName, String bucketName) {

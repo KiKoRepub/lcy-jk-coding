@@ -1,6 +1,6 @@
 minio:
-  endPoint: ${MINIO_API_ENDPOINT}
-  accessKey: ${MINIO_ACCESS_KEY}
-  secretKey: ${MINIO_SECRET_KEY}
-  bucketName: ${MINIO_BUCKET_NAME}
-  pathPrefix: ${MINIO_PATH_PREFIX}
+  endPoint: https://minio-api.dev.jingkunsystem.com:29041/
+  accessKey: admin
+  secretKey: jkstack@minio
+  bucketName: jkstack-poc
+  pathPrefix:
