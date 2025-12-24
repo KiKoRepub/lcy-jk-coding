@@ -1,0 +1,12 @@
+spring:
+  redis:
+    database: ${REDIS_DATABASE}
+    password: ${REDIS_PWD}
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    pool:
+      max-active: 100
+      max-wait: -1
+      max-idle: 100
+      min-idle: 20
+    timeout:  100000

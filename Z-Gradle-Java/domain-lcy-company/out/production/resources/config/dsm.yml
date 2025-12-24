@@ -1,0 +1,4 @@
+process:
+  dsm:
+    url: http://10.202.0.127/aodesk/itsmboot/automation/dpa/stopProcess
+    appConfId: cfbd28c3

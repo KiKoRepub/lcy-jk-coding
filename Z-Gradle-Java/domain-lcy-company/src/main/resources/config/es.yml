@@ -1,0 +1,7 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: ${ELASTICSEARCH_ENDPOINT}
+      username: ${ELASTICSEARCH_USER}
+      password: ${ELASTICSEARCH_PWD}
+    indexName: task

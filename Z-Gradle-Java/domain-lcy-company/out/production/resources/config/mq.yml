@@ -1,0 +1,12 @@
+spring:
+  rabbitmq:
+    addresses: ${RABBITMQ_HOST}:${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PWD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 2
+          initial-interval: 3000

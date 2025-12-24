@@ -1,0 +1,10 @@
+process:
+  api:
+    url: ${process.api.schema}://dpa.dev.jkstack.com:10001/process/processModel/opExecuteProcessByApi
+    webHookUrl: ${process.api.schema}://dpa.dev.jkstack.com:10001/process/processrun/webHookModelExec
+    planUrl: ${process.api.schema}://dpa.dev.jkstack.com:10001/process/processPlan/opExecutePlanByApi
+    method: POST
+    type: application/json
+    # 该配置项用来配置DPA请求协议http or https
+    schema: http
+    host: ${process.api.schema}://dpa.dev.jkservice.org/

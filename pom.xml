@@ -13,6 +13,7 @@
 
     <modules>
         <module>Flowable-Study</module>
+        <module>Dynamic-Process</module>
         <module>Mcp-Server</module>
         <module>Agent2Agent</module>
         <module>Agent-Study</module>

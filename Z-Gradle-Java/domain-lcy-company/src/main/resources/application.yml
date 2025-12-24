@@ -1,0 +1,20 @@
+project:
+  packagePath: com.jk.dpa.component.api.controller
+spring:
+  application:
+    name: ndpa-process
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    include: ${DB_ENGINE:mysql}
+    active: local
+  cloud:
+    config:
+      enabled: false
+    kubernetes:
+      enabled: false
+server:
+  port: 17006
+
+logging:
+  config: classpath:log4j2/log4j2-spring-local.xml

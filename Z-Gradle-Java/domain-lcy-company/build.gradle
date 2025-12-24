@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'lcy.jk'
+version '1.0.0'
+
+repositories {
+    maven {
+        url "http://nexus.jkservice.org/repository/jk-common/"
+        authentication {
+            basic(BasicAuthentication)
+        }
+        allowInsecureProtocol = true
+        credentials {
+            username = 'zhangyajun'
+            password = 'JKSTACKPBzyj@1'
+        }
+    }
+}
+
+dependencies {
+    api "cn.hutool:hutool-all:${hutoolAllVersion}"
+    api "com.jk.starter:minio-spring-boot-starter:${minioVersion}"
+    api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
+    api "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    api "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    api "org.projectlombok:lombok:${lombokVersion}"
+
+
+}
+

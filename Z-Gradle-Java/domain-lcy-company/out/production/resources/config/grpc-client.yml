@@ -1,0 +1,32 @@
+grpc:
+  client:
+    name: ndpa-process
+  package:
+    path: com.jk.grpc
+  provider:
+    - server: ndpa-api-management
+      port: 9001
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-app-aliyun
+      port: 9002
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-app-api
+      port: 9003
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-app-shell
+      port: 9004
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-app-vmware
+      port: 9005
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-process
+      port: 9006
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-user
+      port: 9007
+      namespace: ${POD_NAMESPACE}
+    - server: ndpa-rpa
+      port: 9008
+      namespace: ${POD_NAMESPACE}
+  corePoolSize: 200
+  maxPoolSize: 500

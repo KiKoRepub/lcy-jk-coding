@@ -1,0 +1,4 @@
+grpc:
+  server:
+    port: ${GRPC_PORT}
+    name: ndpa-process

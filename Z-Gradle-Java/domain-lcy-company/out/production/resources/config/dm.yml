@@ -1,0 +1,18 @@
+dm:
+  ## 是否开启插件，true：开启，false：关闭，不设置默认为关闭状态
+  enable: false
+  adapter:
+    ## SQL函数适配器，例如，SELECT GROUP_CONCAT(id) FROM PERSON，需要适配为 SELECT WM_CONCAT(id) FROM PERSON
+    ## 配置为 GROUP_CONCAT: "WM_CONCAT" 即可
+    ## k:代表需要转换的函数，v：代表转换后的函数
+    methods:
+      GROUP_CONCAT: "WM_CONCAT"
+    ## 字段函数适配器，例如：SELECT ID,NAME,DESC FROM PERSON，DESC为系统关键字
+    ## 需要适配为：SELECT ID,NAME,'DESC' FROM PERSON
+    ## 只需要在keywords 加入 - DESC 即可
+    keywords:
+      - DESC
+      - TYPE
+      - CLUSTER
+      - USER
+      - GROUP

@@ -1,0 +1,12 @@
+license:
+  # 白名单接口
+  white-uri:
+    - /doc.html
+    - /swagger-resources
+    - /v2/api-docs
+  # license客户端地址
+  host: ${LICENSE_URL}/${PRODUCT_CODE:dpa}
+  # 额外资源控制配置
+  # 格式为 key: value (key: 对应service处理类的名称，value对应资源的code)
+  type-map:
+    view_process: 19

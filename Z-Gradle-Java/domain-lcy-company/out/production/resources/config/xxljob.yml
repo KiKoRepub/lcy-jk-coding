@@ -1,0 +1,14 @@
+xxl:
+  job:
+    accessToken: default_token
+    admin:
+      addresses: http://${XXL_JOB_ADMIN_ENDPOINT}:${XXL_JOB_ADMIN_PORT}/xxl-job-admin
+    executor:
+      appname: bpm-process
+      ip: ${XXL_JOB_EXECUTOR_ENDPOINT}
+      port: ${XXL_JOB_EXECUTOR_PORT}
+      accessToken:
+      logpath: ${WORKDIR}
+      logretentiondays: 30
+    username: admin
+    password: 123456

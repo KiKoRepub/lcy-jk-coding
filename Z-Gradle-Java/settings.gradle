@@ -2,4 +2,4 @@ rootProject.name = 'Z-Gradle-Java'
 
 include ':Gradle-1'
 include 'Gradle-2'
-
+include 'domain-lcy-company'

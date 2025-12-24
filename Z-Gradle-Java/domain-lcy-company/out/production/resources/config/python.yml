@@ -1,0 +1,19 @@
+python:
+  execute:
+    enable: true
+    exec-type: command
+    location: remote
+    runtime-type: shell
+    plain: http://
+    port: 8093
+    uri: /exec/task_trigger/
+  build:
+    path: /tmp
+    kubePath: ~/.kube/
+    ansiblePath: /tmp/
+    gitBrnach: deveolop
+    # nodeUrl: http://10.202.1.255:8083/api/expression/parse
+    nodeUrl: http://poc.dev.jingkunsystem.com:19041/api/expression/parse
+llm:
+  # agentUrl: http://192.168.3.186:9005
+  agentUrl: http://192.168.3.116:8000

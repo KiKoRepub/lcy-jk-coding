@@ -30,19 +30,26 @@ subprojects {
 
     repositories {
         mavenCentral()
+
     }
 }
 
 // 公共依赖版本
 ext {
+    hutoolAllVersion = '5.8.11'
+    minioVersion = '1.0.14-RELEASES'
+    springDocVersion = '2.3.0'
+    mybatisPlusVersion = '3.5.7'
     commonsLang3 = '3.12.0'
     hutoolAllVersion = '5.8.11'
     springBootVersion = '3.4.5'
     springDocVersion = '2.3.0'
+    lombokVersion = '1.18.22'
 }
 
 // 测试配置（只对 root）
 dependencies {
+    implementation enforcedPlatform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

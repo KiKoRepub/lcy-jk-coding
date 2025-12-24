@@ -1,0 +1,14 @@
+llm:
+  requestUrl: http://47.74.39.193:8000/openai
+  systemUrl: http://192.168.6.16:8088
+  agentUrl: ${KNOWLEDGE_ENDPOINT}
+  glmUrl: ${GLM_ENDPOINT}
+  knowledgeUrl: ${KNOWLEDGE_ENDPOINT}
+  vectorUrl: ${KNOWLEDGE_ENDPOINT}
+  model: ${GLM_MODEL}
+  dbGptUrl: ${DBGPT_ENDPOINT}
+  dbGptSpaceName: ${DBGPT_SPACE_NAME}
+  dpaAgentUrl: ${DPA_AGENT_ENDPOINT}
+  maxTokens: ${MAX_TOKENS}
+  knowledgeFileEndpoint: ${KNOWLEDGE_FILE_ENDPOINT}
+  knowledgeDocEndpoint: ${KNOWLEDGE_DOC_ENDPOINT}

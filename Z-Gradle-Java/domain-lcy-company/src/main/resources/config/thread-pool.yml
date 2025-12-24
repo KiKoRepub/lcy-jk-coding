@@ -1,0 +1,17 @@
+## process服务业务线程池配置
+process-biz-executor-pool:
+  core-pool-size: 5
+  max-pool-size: 20
+  queue-capacity: 1000
+  keep-alive-seconds: 60
+  await-termination-seconds: 60
+
+### MqProcessListener 的消费者数量
+rabbitmq-thread-pool:
+  concurrent-consumers: 5
+  max-concurrent-consumers: 10
+
+## 异步处理，等待结果集的定时任务线程池配置
+wait-process-response-executor-pool:
+  pool-size: 50
+  await-termination-seconds: 60

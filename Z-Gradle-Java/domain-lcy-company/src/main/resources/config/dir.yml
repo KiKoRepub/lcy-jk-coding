@@ -1,0 +1,5 @@
+dpa:
+  work:
+    dir: /opt/.jkDpa/
+    systemVersion: v1.23.2
+    nokiaDspUrl: http://jk.jkstack.poc.nokia-sbell.com/api/dsp/work/callback/noticeParams

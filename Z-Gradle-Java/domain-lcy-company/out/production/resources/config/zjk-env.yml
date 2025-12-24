@@ -1,0 +1,100 @@
+#k8s
+POD_NAMESPACE: ndpa
+
+#minio
+MINIO_API_ENDPOINT: https://minio-api.dev.jingkunsystem.com:29041/
+# MINIO_API_ENDPOINT: http://minio-api.uat.jingkunsystem.com/
+MINIO_ACCESS_KEY: admin
+MINIO_BUCKET_NAME: jkstack-ndpa
+MINIO_SECRET_KEY: jkstack@minio
+MINIO_PATH_PREFIX:
+
+#mysql
+MYSQL_HOST: mysql.dev.jkservice.org
+MYSQL_PORT: 3306
+MYSQL_USER: root
+MYSQL_PWD: jkstack
+MYSQL_DATABASE: ndpa_process
+
+#dm mysql
+DM_HOST: 192.168.3.215
+DM_USER: SYSDBA
+DM_PWD: dm123qweASD
+DM_DATABASE: NDPA_PROCESS
+
+#REDIS
+REDIS_DATABASE: 12
+REDIS_PWD: jkstack
+REDIS_HOST: redis.dev.jkservice.org
+REDIS_PORT: 6379
+
+# rabbitmq
+#RABBITMQ_HOST: rabbitmq.dev.jkservice.org
+#RABBITMQ_PORT: 5672
+#RABBITMQ_USER: admin
+#RABBITMQ_PWD: jkstack
+RABBITMQ_HOST: 192.168.3.186
+RABBITMQ_PORT: 5672
+RABBITMQ_USER: admin
+RABBITMQ_PWD: OcFPntqQb2W
+RABBITMQ_VIRTUAL_HOST: /
+
+# ELASTICSEARCH
+ELASTICSEARCH_ENDPOINT: http://es.dev.jkservice.org:9200
+ELASTICSEARCH_USER: elastic
+ELASTICSEARCH_PWD: jkstack
+#ELASTICSEARCH_ENDPOINT: http://192.168.3.183:9200
+#ELASTICSEARCH_HOST: 192.168.3.183
+#ELASTICSEARCH_PORT: 9200
+#ELASTICSEARCH_USER: admin
+#ELASTICSEARCH_PWD: admin
+
+# xxl-job
+#XXL_JOB_ADMIN_ENDPOINT: http://localhost:8885/xxl-job-admin
+#XXL_JOB_EXECUTOR_IP: 192.168.3.186
+#XXL_JOB_EXECUTOR_PORT: 7998 8885
+XXL_JOB_ADMIN_ENDPOINT: 192.168.3.186
+XXL_JOB_ADMIN_PORT: 8885
+XXL_JOB_EXECUTOR_ENDPOINT:
+XXL_JOB_EXECUTOR_PORT: 7998
+
+# grpc
+GRPC_PORT: 9006
+
+# seata
+SEATA_GROUP: tx_jk_group
+SEATA_GROUP_LIST: 192.168.3.183:18091
+
+# DP_URL
+DP_URL: http://jkstack.dev.jingkunsystem.com:19041/api/dp/auth
+DP_PORTAL_ENDPOINT: http://dp.dev.jkservice.org/api/dp/portal
+
+# 知识库URL
+KNOWLEDGE_URL: http://192.168.3.186:9005
+
+# license
+PRODUCT_CODE: dpa
+LICENSE_URL: http://dp.dev.jkservice.org/api/dp/license
+
+# XXL
+WORKDIR: ./logs
+
+# DM
+DB_ENGINE: mysql
+
+CA_GATEWAY_ENDPOINT: http://ca.dev.jkservice.org/api/ca/gateway
+
+# GLM
+KNOWLEDGE_ENDPOINT: http://192.168.3.186:9005
+GLM_ENDPOINT: http://ca.dev.jkservice.org/api/ca/gateway/
+DBGPT_ENDPOINT: http://10.0.2.71:5670
+DBGPT_SPACE_NAME: 交通专报知识库
+# GLM_MODEL: deepseek-r1-distill-llama-70b
+GLM_MODEL: qwen2.5-72b-instruct
+DPA_AGENT_ENDPOINT: http://localhost:9009
+MAX_TOKENS: 8192
+## new df api
+#DF_MODEL_ENDPOINT: http://df.dev.jkservice.org/api/df/mdm
+DF_MODEL_ENDPOINT: https://jkstack.dev.jingkunsystem.com:29041/api/df/mdm
+KNOWLEDGE_FILE_ENDPOINT: http://minio.shdata.com:30003/public/
+KNOWLEDGE_DOC_ENDPOINT: http://192.168.100.100:8011

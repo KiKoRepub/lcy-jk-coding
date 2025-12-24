@@ -1,0 +1,11 @@
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/mps/*.xml,classpath:mapper/workflow/*.xml
+  configuration:
+    # log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+db:
+  column:
+    createTime: createTime
+#    createUser: createUser
+

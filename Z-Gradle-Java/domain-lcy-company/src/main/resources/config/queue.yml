@@ -1,0 +1,8 @@
+rabbitmq:
+  exchange: process_manager_exchange
+  queuename:
+    dpaProcess: dpa_process_queuen_${spring.profiles.active}
+    dpaProcessParam: dpa_process_param_queuen_${spring.profiles.active}
+    dpaProcessWork: dpa_process_work_queuen_${spring.profiles.active}
+    dpaAnsible: dpa_ansible_queuen_${spring.profiles.active}
+

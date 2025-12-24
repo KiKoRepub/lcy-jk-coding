@@ -1,0 +1,33 @@
+jwt:
+  id: userId
+  auth: dpa-auth
+  authSecret: dpaCloud
+
+# 东方龙使用默认账号请求dpa配置
+dfl:
+  #东方龙开启, 标准dpa设置为false
+  dflEnable: false
+  #从请求中获取该名字的cookie
+  auth: token
+  #东方龙使用的dpa默认用户名
+  dpaDefaultUser: admin
+  #东方龙使用的dpa默认密码
+  dpaDefaultPassword: MTIzNDU2
+  #东方龙使用的dpa默认用户类型
+  userType: PLATFORM
+  #东方龙认证token接口地址
+  dflAuthUrl: https://api.dp.ibbtv.cn/v1/base/me
+  #重定向到东方龙DP登录页地址
+  dflLoginUrl: https://dp.ibbtv.cn/login
+# 退出登录重定向地址
+logout:
+  callbackUrl: ""
+dp:
+ authUrl: ${DP_URL}
+ licenseUrl: ${LICENSE_URL}
+ dfModelEndpoint: ${DF_MODEL_ENDPOINT}
+ dpPortalEndpoint: ${DP_PORTAL_ENDPOINT}
+
+# 保存流程出参
+process:
+  saveEnable: true

@@ -1,0 +1,7 @@
+com:
+  jk:
+    url:
+      vmUrl: ${VM_URL}
+      aliyunUrl: ${ALIYUN_URL}
+vmUrl: ${VM_URL}
+aliyunUrl: ${ALIYUN_URL}

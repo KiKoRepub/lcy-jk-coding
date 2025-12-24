@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">/opt/jkstack/logs/dpa</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="app-file-appender" fileName="${log-path}/app.log" filePattern="${log-path}/app-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+
+        <RollingFile name="springBoot-file-appender" fileName="${log-path}/spring.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+
+        <RollingFile name="starter-file-appender" fileName="${log-path}/starter.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+
+        <RollingFile name="grpc-file-appender" fileName="${log-path}/grpc.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!--spring 日志-->
+        <Logger name="org.springframework" level="INFO" additivity="true">
+            <AppenderRef ref="springBoot-file-appender"/>
+        </Logger>
+        <!--服务模块 日志-->
+        <Logger name="com.jk.flow" level="DEBUG" additivity="true">
+            <AppenderRef ref="app-file-appender"/>
+        </Logger>
+        <!--服务模块 日志-->
+        <Logger name="com.jk.dpa" level="DEBUG" additivity="true">
+            <AppenderRef ref="app-file-appender"/>
+        </Logger>
+        <!--starter配置 日志-->
+        <Logger name="com.jk.starter" level="DEBUG" additivity="true">
+            <AppenderRef ref="starter-file-appender"/>
+        </Logger>
+        <!--grpc 日志-->
+        <Logger name="com.jk.grpc" level="INFO" additivity="true">
+            <AppenderRef ref="grpc-file-appender"/>
+        </Logger>
+        <Logger name="org.springframework.data.convert.CustomConversions" level="ERROR"></Logger>
+        <Root>
+            <AppenderRef ref="console-Appender"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

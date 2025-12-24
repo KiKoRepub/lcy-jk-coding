@@ -1,0 +1,7 @@
+cmdb:
+  loginUrl: http://cmdp.dev.jkstack.com/cmdb/login
+  ciUrl: http://cmdp.dev.jkstack.com/cmdb/cmdbUser/ciVoucher
+  tyUrl: http://cmdp.dev.jkstack.com/cmdb/cmdbUser/getVouchers
+email:
+  suffix: vanke.com
+  protocol: smtp
